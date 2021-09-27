@@ -1,0 +1,4 @@
+Following diagrams are to be created and then implemented:
+1. Base.html template design. (screenshot as of now next desing update will start from a wireframe design)
+2. SignUp and LogIn page design.
+3. ER diagram for the User model.

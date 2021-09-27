@@ -1,0 +1,197 @@
+{% extends 'base1.html' %}
+{% block content %}
+<div class="p-5">
+    <h1 class="myhead2">My Posts </h1>
+
+    <hr>
+    <h2>Followers : {{ cnt }} </h2>
+    <h2>{{ cnt }}</h2>
+    <form class="form-inline">
+        <input class="form-control mr-3" placeholder="Search" value="{{ request.GET.si }}" type="text" name="si" />
+        <input class="btn btn-dark mr-3" type="submit" value="Search" />
+        <a class="btn btn-dark" href="/social/mypost/create"><span class="fa fa-plus"></span></a>
+    </form>
+    {% comment %} <div class="row p-5"> {% endcomment %}
+
+        {% for n1 in mypost_list %}
+        <div class="post-super-container">
+
+            <div class="post-container">
+                <div class="post-intro">
+                    <div class="post-intro-inner">
+                        <img src="{{n1.uploaded_by.user_id.applicantuserprofile.profile_pic.url}}" alt="dp">
+                        <div class="post-intro-text">
+                            <p class="name-heading">{{n1.uploaded_by.user_id.first_name}}
+                                {{n1.uploaded_by.user_id.last_name}}</p>
+                            <p class="current-status-heading">
+                                {{n1.uploaded_by.user_id.applicantuserprofile.description}}</p>
+                        </div>
+                    </div>
+                    <div class="post-menu">
+                        <small>4d</small>
+                    </div>
+
+                </div>
+                <div class="post-text">
+
+                    <p><b>{{n1.msg}}</b></p>
+                </div>
+                <div class="post-image">
+                    <img src="{{n1.pic.url}}" alt="image">
+                </div>
+
+
+                <div class="post-image-option">
+
+                    <div class="post-image-option-inner">
+
+                        {% if n1.liked %}
+                        <a href='/social/mypost/unlike/{{n1.id}}'><i class="far fa-thumbs-down"></i></a>
+                        {% else %}
+                        <a href='/social/mypost/like/{{n1.id}}'><i class="far fa-thumbs-up"></i></a>
+                        {% endif %}
+
+
+                        <i class="far fa-comment-dots"></i>
+                        <i class="far fa-save"></i>
+                    </div>
+
+
+
+
+                <!-- ========================= Rating ============================= -->
+                {% if n1.rated %}
+
+
+                <input type="range" class='range-rate' id='p1' name='product' value="{{n1.rating_sore}}" disabled>
+                <!-- <span class="badge badge-warning">{{n1.rating_sore}}%</span> -->
+
+                <div class="post-share-btn">
+                    <i class="fas fa-share-alt" id="share-btn"></i>
+                </div>
+
+            </div>
+                {% else %}
+
+                <div class='p-2 mt-3'>
+                    <form class="rate-form" action="rate/{{n1.id}}" method="POST">
+                        {%csrf_token%}
+                        <fieldset>
+                            <div class="range-slider">
+
+                                <input type="range" class="range-slider__range" id='p1' name='product' value="0">
+
+                                <button type="submit" class='btn btn-outline-success'>Confirm</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <script>
+                    var rangeSlider = function () {
+                        var slider = $('.range-slider'),
+                            range = $('.range-slider__range'),
+                            value = $('.range-slider__value');
+
+                        slider.each(function () {
+
+                            value.each(function () {
+                                var value = $(this).prev().attr('value');
+                                $(this).html(value);
+                            });
+
+                            range.on('input', function () {
+                                $(this).next(value).html(this.value);
+                            });
+                        });
+                    };
+
+                    rangeSlider();
+                </script>
+                {% endif %}
+
+
+                <!-- =========================  ENd of Block Rating ====================== -->
+
+
+                <div id="commentbox">
+
+                    <form action="/social/mypost/comment/{{n1.id}}" method="POST" class="mt-2">
+                        {% csrf_token %}
+                        {{ n1.comment_form.as_p }}
+                        <input type="submit" value="Comment" class="btn btn-outline-success">
+                    </form>
+
+                    {% if n1.comments %}
+                    <div class="main-comment-section">
+                        {{ n1.comments.count }} Comment{{ n1.comments|pluralize }}
+                        {% for comment in n1.comments %}
+                        <blockquote class="blockquote">
+                            <p class="mb-0">{{ comment.content }}</p>
+                            <footer class="blockquote-footer">by <cite title="Source Title">{{
+                                    comment.commented_by|capfirst }}</cite></footer>
+                        </blockquote>
+
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+
+        {% comment %}
+
+        {% for n1 in mypost_list %}
+        <div class="col-sm-4 p-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="/media/{{n1.pic}}" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">{{n1.subject}}</h4>
+                    <p class="card-text">{{n1.cr_date | date:"d/m/y"}} - {{n1.uploaded_by}}
+                        {% if n1.uploaded_by.pic %}
+                        <img style="width: 50px; height: 50px;" class="img-fluid rounded-circle"
+                            src="/media/{{n1.uploaded_by.pic}}" />
+                        {% endif %}
+                    </p>
+                    {% if n1.liked %}
+                    <a class="btn btn-danger btn-sm" href='/social/mypost/unlike/{{n1.id}}'><span
+                            class="fa fa-thumbs-down"></span></a>
+                    {% else %}
+                    <a class="btn btn-success btn-sm" href='/social/mypost/like/{{n1.id}}'><span
+                            class="fa fa-thumbs-up"></span></a>
+                    {% endif %}
+                    <a class="btn btn-dark btn-sm" href='/social/mypost/{{n1.id}}'>Read More</a>
+                    {% if user.is_superuser %}
+                    <a class="btn btn-danger btn-sm" href='/social/mypost/delete/{{n1.id}}'><span
+                            class="fa fa-trash"></span></a>
+                    {% endif %}
+                    <span class="badge badge-info">Likes {{n1.likedno}}</span>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %} {% endcomment %}
+        {% comment %}
+    </div> {% endcomment %}
+
+    <!--    <script>-->
+    <!--        function myComment() {-->
+    <!--  var x = document.getElementById("commentbox");-->
+    <!--  if (x.style.display === "none") {-->
+    <!--    x.style.display = "block";-->
+    <!--  } else {-->
+    <!--    x.style.display = "none";-->
+    <!--  }-->
+    <!--}-->
+
+    <!--    </script>-->
+
+    {% endblock %}
+

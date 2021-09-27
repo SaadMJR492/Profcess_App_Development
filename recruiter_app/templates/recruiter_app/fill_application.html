@@ -1,0 +1,9 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h1>
+    Please complete your profile Here
+    <br>
+    <a href="{% url 'recruiter:profile' pk=user.pk %}"><button class="btn btn-primary"><b>Complete Profile -></b></button></a>
+
+</h1>
+{% endblock content %}

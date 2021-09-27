@@ -1,0 +1,6 @@
+id,Username,email,Usertype,Password,Confirm Pass,skill_info,first_name
+10333,ibm,ibm@gmail.com,Applicant,newuser123,newuser123,ABC,III
+10444,azure,azure@gmail.com,Applicant,newuser124,newuser124,BBB,AAA
+1099999,hdddd,hddd@gmail.com,Applicant,newuser1,newuser1,HDDD,DDD
+12345678,adserd,sss@mm.com,Applicant,newuser1,newuser1,jjj,MMMM
+124578954,ruchi,ruchi@gmail.com,Applicant,newuser1,newuser1,c++,Ruchi

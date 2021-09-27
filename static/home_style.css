@@ -1,0 +1,100 @@
+.post-super-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FEECDE;
+    box-sizing: border-box;
+
+}
+
+.post-container {
+    width: 400px;
+    border: 1px solid #e0dfdc;
+    margin: 20px;
+    padding: 12px;
+    background: #F6F6F6;
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px rgba(117, 117, 116, 0.205);
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+.post-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-intro img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+
+}
+
+.post-intro-inner {
+    display: flex;
+    align-items: center;
+
+}
+
+.post-intro-text {
+    padding: 10px;
+}
+
+.post-menu i,
+.post-menu small {
+    padding: 3px;
+}
+
+.post-intro-text p {
+    padding: 0;
+    margin: 0;
+}
+
+.post-intro-text .name-heading {
+    font-size: 22px;
+    font-weight: bold;
+
+}
+
+.post-intro-text .current-status-heading {
+    color: royalblue;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.post-menu {
+    justify-self: flex-end;
+}
+
+.post-container .post-image {
+    display: flex;
+    justify-content: center;
+}
+
+.post-container .post-image img {
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+}
+
+.post-container .post-image-option {
+    margin: 10px 0 0 5px;
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-container .post-image-option i {
+    padding: 8px;
+    color: black;
+}
+
+.post-container .post-text p {
+    font-size: 15px;
+}
+
+.post-container .post-image-option #share-btn {
+    margin-right: auto;
+}

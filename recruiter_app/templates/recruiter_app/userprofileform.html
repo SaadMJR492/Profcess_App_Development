@@ -1,0 +1,238 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block content %}
+ <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    <link rel="stylesheet" href="{% static 'css/gijgo.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slimselect.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<style>
+.img-circle {
+        border-radius: 50%;
+        position: relative;
+        right: 70%;
+        border: 5px solid #0052c2;
+    }
+.titletext:before,
+        .titletext:after{
+        background-color: blue;
+            content: "";
+            display: inline-block;
+            height: 3px;
+            position: relative;
+            vertical-align: middle;
+            width: 10%;
+            font-size: 5px;
+        }
+
+       .titletext:before {
+            right: 0.5em;
+            margin-left: -10%;
+       }
+
+       .titletext:after {
+            left: 0.5em;
+            margin-right: -15%;
+        }
+        .form-group{
+  padding:10px
+  margin:10px;
+}
+.form-group>label{
+  position:absolute;
+  top:-15px;
+  left:35px;
+  background-color:white;
+}
+
+.form-group>input{
+  border:3px solid blue;
+  width:90%;
+  border-radius: 5px;
+  height:40px;
+}
+.form-group>textarea{
+ border:3px solid blue;
+ height:120px;
+ width:90%;
+ border-radius: 5px;
+}
+.form-group>select{
+ border:3px solid blue;
+width:90%;
+ height:40px;
+ border-radius:5px;
+}
+
+</style>
+<br><br><br><br>
+
+<div class="container-fluid mt--6">
+    <div class="row justify-content-center">
+        <div class="col-md-11 col-12">
+      <h1 style="color:#021bab;text-align:center;font-size:30px;"><b>Fill Up Your Details</b></h1>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <form method="POST">
+
+                            {% csrf_token %}
+                           <br>
+                            <h2 class="titletext"><b>Personal Details</b></h2><br>
+                            <div>
+                            <div class="row">
+                                <div class="col-xl form-group">
+                                    <label><b>First Name</b></label>
+                                    <input type="text" id="firstName" class="form-control" value="{{user.first_name}}"
+                                    name="first_name" />
+                                </div>
+                                <div class="col-xl form-group">
+                                    <label><b>Last Name</b></label>
+                                    <input type="text" id="lastName" class="form-control" value="{{user.last_name}}"
+                                    name="last_name" />
+                                </div>
+                            </div>
+                                <br>
+                            <div class="row">
+                                <div class="col-xl form-group">
+                                    <label><b>Username</b></label>
+                                    <input type="text" id="username" class="form-control" value="{{user.username}}"
+                                    name="username" />
+                                </div>
+                                <div class="col-xl form-group">
+                                    <label><b>Designation</b></label>
+                                    {{ u_form.designation}}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xl form-group">
+                                    <label><b>Email</b></label>
+                                    <input type="text" id="email" class="form-control" value="{{user.email}}"
+                                    name="email" />
+                                </div>
+                                <div class="col-xl form-group">
+                                    <label><b>Contact</b></label>
+                                    <input type="text" id="phone" class="form-control" value="{{user.phone}}"
+                                    name="phone" />
+                                </div>
+                            </div>
+                                <br>
+                            <div class="row">
+                                <div class="col-xl form-group">
+                                    <label><b>Country</b></label>
+                                    {{ u_form.country }}
+                                </div>
+                                <div class="col-xl form-group">
+                                    <label><b>State</b></label>
+                                    {{ u_form.state }}
+                                </div>
+                            </div>
+                            </div>
+                            <br>
+                            <h2 class="titletext"><b>Company Details</b></h2><br>
+                            <div class="container">
+                                 <div class="row">
+                                 <div class="col-md-3">
+                                     {% if request.user.recruiteruserprofile.profile_pic %}
+                                            <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+                                            <img class="img-circle"
+                                                src="{{ request.user.recruiteruserprofile.profile_pic.url }}"
+                                                 height="250"
+                                                  width="100%"
+                                                 style="margin-left:30px;"
+                                                class="img-thumbnail"
+                                                 alt="profile">
+                                         <img src="{{ url }}" alt="" />
+                                     </a>
+
+                                        {% else %}
+                                       <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+                                                 <img class="img-circle"
+                                                 src="{% static 'dashboard/img/theme/person.png' %}"
+                                                 style="margin-left:100px;"
+                                                class="img-thumbnail"
+                                                 alt="profile">
+                                                 <img src="{{ url }}" alt="" />
+                                             </a>
+                                   {% endif %}
+
+                             </div><br>
+                                     <div class="col-md-9">
+                     <br><br>
+                     <div class="t1">
+                    <h1 style="font-size: 300%;font-weight:bold;position:absolute;left:-15%;"> {{user.company_name}}</h1><br><br>
+                         <a href="{% url 'recruiter:upload_pic' pk=user.pk %}" style="color:black;font-size:25px;position:relative;top:30px; left:-18%;"><b>Change Pic</b></a>
+                         &nbsp;&nbsp; <a href="{% url 'recruiter:delete_pic' pk=user.pk %}" style="color:red;font-size:25px;position:relative;top:30px; left:-18%;"><b>Remove Pic</b></a>
+
+                     </div>
+                 </div>
+                            </div>
+                            </div>
+                          <div class="row">
+                              <div class="col-xl form-group">
+                                  <label><b>Company Name</b></label>
+                                  <input type="text" id="company_name" class="form-control" value="{{user.company_name}}"
+                                    name="company_name" />
+                              </div>
+                              <div class="col-xl form-group">
+                                  <label><b>Company Email</b></label>
+                                  {{ u_form.company_email}}
+                              </div>
+                          </div><br>
+                            <div class="row">
+                              <div class="col-xl form-group">
+                                  <label><b>Company Description</b></label>
+                                  {{ u_form.company_description}}
+                              </div>
+
+                              <div class="col-xl form-group">
+                                  <div class="form-group">
+                                  <label><b>URL of the Company</b></label>
+                                  {{ u_form.Url_of_company}}
+                                      </div><br>
+                                  <div class="form-group" style="position:relative;">
+                                  <label><b>Location</b></label>
+                                  {{ u_form.location}}
+                                      </div>
+                              </div>
+                          </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" style="border-radius:10px; width:200px;">SAVE AND NEXT</button>
+                            </div>
+                        </form>
+                        {{ profs }}
+                        <br><br><br>
+                    </div>
+                </div>
+    </div>
+</div>
+{% if successful_submit %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+{% endif %}
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+                <h4 class="modal-title w-100"><b>Profile Updated!</b></h4>
+               </div><br><br>
+			<div class="modal-footer justify-content-center">
+                <form method="POST" action="{% url 'recruiter:search_candidates' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Okay</button>
+                </form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+

@@ -1,0 +1,2 @@
+id,Username,Usertype,Password,Confirm Pass,first_name,last_name,phone
+110,ere@gmail.com,Applicant,pbkdf2_sha256$180000$f5WahkkRStBO$EI1tirlTZBBt1Y1ROq/3DpEXJmXBlFRUWmyYP4GF2RA=,pbkdf2_sha256$180000$f5WahkkRStBO$EI1tirlTZBBt1Y1ROq/3DpEXJmXBlFRUWmyYP4GF2RA=,Rups,Shukla

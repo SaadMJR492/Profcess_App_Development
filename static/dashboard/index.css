@@ -1,0 +1,12 @@
+.person_icon {
+    content: url('img/theme/person.png');
+    height: 35px;
+    margin-left:-8px;
+    text-align: center;
+}
+
+.card {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+

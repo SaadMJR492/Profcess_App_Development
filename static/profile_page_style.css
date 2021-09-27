@@ -1,0 +1,268 @@
+.super-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    background-color: white;
+    font-size: 15px;
+
+}
+
+* {
+    box-sizing: unset;
+}
+
+.profile-container {
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 25px rgba(117, 117, 116, 0.205);
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+
+}
+
+.profile-container img {
+    height: 250px;
+    width: 700px;
+}
+
+.profile-container .back-icon {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+
+}
+
+.profile-container .profile-card {
+    width: 500px;
+    height: 240px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: relative;
+    top: -50px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+
+}
+
+.profile-container .profile-card i {
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.profile-container .profile-card .profile-card-intro {
+    display: flex;
+    align-items: center;
+
+}
+
+.profile-container .profile-card .profile-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.profile-container .profile-card img {
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    padding: 10px;
+}
+
+.profile-container .profile-card .profile-card-intro .profile-intro-inner {
+    display: flex;
+
+}
+
+.profile-container .profile-card .profile-card-intro .profile-intro h1 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.profile-container .profile-card .profile-card-intro .profile-intro-inner small {
+    color: rgba(0, 0, 0, 0.76);
+}
+
+.profile-container .profile-card .profile-card-intro .profile-intro-inner small:nth-child(1) {
+    padding-right: 15px;
+    border-right: 1px solid black;
+}
+
+
+.profile-container .profile-card .profile-card-intro .profile-intro-inner small:nth-child(2) {
+    padding-left: 15px;
+}
+
+.profile-container .profile-card .profile-links {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-container .profile-card .profile-links a {
+    text-decoration: none;
+    background-color: rgb(0, 65, 153);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 6px;
+    /* font-size: 15px;s */
+}
+
+.profile-container .profile-stats {
+    display: flex;
+    justify-content: space-around;
+    width: 500px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: rgb(0, 65, 153);
+
+}
+
+
+.profile-container .profile-stats h2 {
+    margin: 0 0;
+    font-size: 2rem;
+
+}
+
+.profile-container .profile-stats small {
+    font-size: medium;
+    font-weight: 700;
+}
+
+.profile-container .profile-stats .divider {
+    width: 2px;
+    height: 40px;
+    background-color: black;
+    transform: translateY(15px);
+
+}
+
+.profile-container .profile-heading,
+.profile-container .profile-heading-hobby {
+    width: 600px;
+    font-weight: bold;
+    position: relative;
+
+}
+
+.profile-container .profile-heading p {
+    display: inline;
+    margin: 1px;
+}
+
+.profile-container .profile-heading::after {
+    position: absolute;
+    content: "";
+    background: rgb(0, 65, 153);
+    width: 370px;
+    height: 2px;
+    right: 0;
+    top: 50%;
+}
+
+.profile-container .profile-heading-hobby::after {
+    position: absolute;
+    content: "";
+    background: rgb(0, 65, 153);
+    width: 440px;
+    height: 3px;
+    right: 0;
+    top: 50%;
+
+}
+
+
+
+.profile-container .profile-user-personal-info {
+    margin: 30px 0;
+    width: 600px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-container .profile-user-personal-info i {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    color: rgb(0, 65, 153);
+    padding: 10px;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+}
+
+.profile-container .profile-toggle {
+    width: 500px;
+    background: rgb(0, 65, 153);
+    border: 3px solid rgb(0, 65, 153);
+    border-radius: 10px;
+    position: relative;
+    margin: 20px;
+}
+
+.profile-container .profile-toggle .profile-toggle-btn {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    width: 248px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 18px;
+    transition: 0.5s ease-in-out;
+}
+
+.profile-container .profile-toggle #btn-tagged {
+    color: rgb(0, 65, 153);
+}
+
+.profile-container .profile-toggle #btn {
+    position: absolute;
+    top: 0;
+    left: 250px;
+    width: 250px;
+    height: 100%;
+    border-radius: 10px;
+    background: white;
+    transition: 0.5s ease-in-out;
+}
+
+.profile-container .profile-posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profile-container .profile-post {
+    height: 280px;
+    width: 280px;
+    margin: 20px;
+}
+
+
+
+.profile-container .profile-post img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}

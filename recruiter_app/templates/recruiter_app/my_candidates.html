@@ -1,0 +1,128 @@
+{% extends "dashboard.html" %} {% block content %}
+
+<style>
+    .card{
+            border: 2px solid blue;
+              border-bottom: 20px solid blue;
+ 			border-radius: 20px;
+
+ 		}
+ 	.user_detail{
+<!-- 	        margin-left:100px;-->
+ 	        font-Weight:bold;
+ 	        font-size:20px;
+
+ 	}
+ 	.btn_style
+ 	{
+ 	  border-radius: 20px;
+ 	   height:50px;
+ 	}
+</style>
+
+<!--    <div class="header bg-primary pb-6">-->
+<!--        <div class="container-fluid">-->
+<!--            <div class="header-body">-->
+<!--                <div class="row align-items-center py-4">-->
+<!--                    <div class="col-lg-6 col-7">-->
+<!--                        <h6 class="h2 text-white d-inline-block mb-0">Job Listing</h6>-->
+<!--                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">-->
+<!--                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">-->
+<!--                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>-->
+<!--                                <li class="breadcrumb-item active" aria-current="page">jobs posted for candidates</li>-->
+<!--                            </ol>-->
+<!--                        </nav>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="container-fluid mt&#45;&#45;6">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-md-8 col-12">-->
+<!--                <div class="card">-->
+<!--                    &lt;!&ndash; Card header &ndash;&gt;-->
+<!--                    <div class="card-header bg-transparent border-0">-->
+<!--                        <h1>List Of Jobs Posted for Candidates</h1>-->
+<!--                        <span> Click on the job to view best matching candidates.</span>-->
+<!--                    </div>-->
+
+<!--                    <div class="card-body">-->
+<!--                        <div class="alert alert-primary" role="alert">-->
+<!--                            You have listed {{ count }} jobs!-->
+<!--                        </div>-->
+<!--                        {% if jobs %}-->
+<!--                            <ul class="list-group list-group-flush">-->
+<!--                                {% for job in jobs %}-->
+
+<!--                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         -->
+<!--                                    <a href="{% url 'recruiter:job_matching' pk=job.pk  %}">-->
+<!--                                        <li class="list-group-item">{{ job.job_title }}</li>-->
+<!--                                    </a>-->
+
+<!--                                    </ul>-->
+<!--                                {% endfor %} {% else %}-->
+<!--                            <p>You haven't posted any jobs</p>-->
+<!--                        {% endif %}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<div >
+  <center><h1 style="color: #0052c2; font-family: Arial, Helvetica, sans-serif; padding=5px; font-size:40px">My Candidates</h1></center>
+</div>
+<div class="container-fluid mt-4"  >
+       {% if m %}
+       {% for c in m %}
+       <a href="{% url 'recruiter:applicant_detail' pk=c.pk  %}">
+
+       <div  class="card mt-4">
+          <div class="card-body " >
+              <div class="row" style="color:black;">
+                    <div class="col-lg-2 col-sm-3 d-flex justify-content-center ">
+<!--                        https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50-->
+                        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" style="border-radius: 50%" height="150" width="150">
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <h1 style="font-size: 40px; font-weight:bold;">{{ c.first_name }} {{ c.last_name }}</h1>
+                        <p >UX/UI Designer</p>
+                        <p class="fas fa-map-marker-alt fa-lg mt-3" > {{ c.location }}</p>
+                    </div>
+                    <div class="col-lg-7 col-sm-5" >
+                        <ul class="float-right" style="list-style-type:none">
+                            <li><button type="button" class="btn btn-primary btn_style" >Shortlist</button></li>
+                            <li><button type="button" class="btn btn-warning btn_style mt-3 ">Details</button></li>
+                        </ul>
+                    </div>
+              </div>
+              <div class="row mt-4 ">
+                  <div class="col-lg-2 d-flex justify-content-center "><h3 class="user_detail">Education</h3></div>
+                  <div class="col-lg-10 "><p>{{ c.education }}</p></div>
+                  <div class="col-lg-2 d-flex justify-content-center "><h3 class="user_detail">Skills</h3></div>
+                  <div class="col-lg-10"><p>{{ c.skill_info }}</p></div>
+                  <div class="col-lg-2 d-flex justify-content-center"><h3 class="user_detail">Work History</h3></div>
+                  <div class="col-lg-10"><p>{{ c.description }}</p></div>
+                  <div class="col-lg-2 d-flex justify-content-center "><h3 class="user_detail">Language</h3></div>
+                  <div class="col-lg-10"><p>csmvajh cshavh schvhjv</p></div>
+              </div>
+          </div>
+        </div>
+    </a>
+       {% endfor %}
+
+        {% else %}
+        <div class="card-header bg-transparent border-0">
+            <span> NO result found</span>
+        </div>
+        {% endif %}
+
+         <div class="text-center col-md-12 mb-6">
+            <a href="" class="btn btn-outline-primary rounded-pill">+Add More Candidate </a>
+            <a href="" class="btn btn-primary rounded-pill">Proceed to pay</a>
+        </div>
+
+    </div>
+{% endblock content %}

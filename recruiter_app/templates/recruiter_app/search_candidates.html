@@ -1,0 +1,984 @@
+{% extends "dashboard.html" %}
+{% block content %}
+{% load static %}
+
+<head>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>-->
+{% if not paid %}
+<script>
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
+{% endif %}
+</head>
+<style type="text/css">
+
+.accordian{
+	max-width:280px;
+	margin-bottom:-50px;
+
+}
+
+.accordian .card{
+
+	width: 100%;
+	border-style:solid;
+    border-color:blue;
+
+
+}
+.accordian .card .card-header div{
+    border-color:red;
+    margin-bottom:5px;
+
+
+}
+.accordian .card .card-header{
+
+    background-color: #0275d8;
+    border-radius:10px;
+    padding:2px 5px;
+
+
+}
+.accordian .card .card-header i{
+    text-align:left;
+    position:relative;
+}
+.accordian .card .card-header h4{
+	cursor: pointer;
+	color:#ffffff;
+	position: relative;
+	background-color: #0275d8;
+    text-align:left;
+    color:white;
+}
+
+.accordian .card .card-header span{
+	position: absolute;
+	height:25px;
+	width:25px;
+	color:white;
+	background-color:#0275d8;
+
+	text-align: right;
+	line-height:25px;
+	font-size:13px;
+}
+
+.accordian .card .card-body{
+	padding:20px;
+}
+.accordian .card .card-body{
+	display: none;
+}
+
+.accordian .card .card-body label{
+	font-size: 12px;
+	line-height: 20px;
+	color:black;
+	font-weight:bold;
+
+}
+.accordian .card .card-body input{
+	font-size: 10px;
+	line-height: 20px;
+	color:black;
+	margin-bottom:35px;
+	border:none;
+	border-bottom:1px solid black;
+    margin-bottom:4px;
+}
+
+.accordian .card .card-body select{
+	font-size: 10px;
+	line-height: 20px;
+	color:black;
+	margin-bottom:20px;
+	border:none;
+	border-bottom:1px solid #0275d8;
+    margin-bottom:4px;
+}
+
+    .topNavCol{
+        border-radius: 60px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        height: 72.8px;
+    }
+
+    .candidateDetail{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        margin-left:40px;
+        margin-right:40px;
+        width:100%;
+        border-radius: 25px;
+        height:300px;
+        overflow-y:scroll;
+    }
+    .textChange{
+        text-transform: capitalize;
+    }
+    .card{
+        margin-top:4rem;
+        margin-left:0rem;
+
+
+
+    }
+    .roundSideRight{
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .roundSideLeft{
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    #breadth{
+        width: 150px;
+
+    }
+    @media screen and (min-width: 786px) {
+        #breadth{
+            width: 250px;
+        }
+    }
+    @media screen and (min-width: 1100px) {
+        #breadth{
+            width: 700px;
+            margin-right:20px;
+            border-radius:15px;
+            border-width: 2.5px;
+            border-style:solid;
+            border-color:#0275d8;
+             box-shadow: 5px 5px 5px grey;
+
+        }
+    }
+    @media screen and (min-width: 1100px) {
+        #breadth2{
+            width: 100px;
+            margin-right:20px;
+             border-radius:15px;
+            border-style:solid;
+            border-width:2.5px;
+            border-color:#0275d8;
+            box-shadow: 5px 5px 5px grey;
+
+        }
+    }
+     @media screen and (min-width: 1100px) {
+        #breadth1{
+            width: 250px;
+            margin-right:20px;
+             border-radius:15px;
+            border-style:solid;
+             box-shadow: 5px 5px 5px grey;
+            border-width:2.5px;
+
+
+
+            border-color:#0275d8;
+        }
+    }
+    .apply-border{
+        border-right: 1px solid black;
+        text-align: center;
+    }
+    .activated{
+        background-color: #0275d8;
+        color:white;
+    }
+    .media-body{
+        height: 130px;
+        width: 1000px;
+    }
+    .modal-confirm {
+	color: #636363;
+	width: 400px;
+	position: absolute;
+    left: 40%;
+    top: 30%;
+
+
+}
+.modal-confirm .modal-content {
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 0px;
+	border-radius: 25px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;
+	position: relative;
+
+}
+.modal-confirm h5 {
+	text-align: center;
+	font-size: 22px;
+	margin: 30px 0 -10px;
+}
+
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #000;
+	border-radius: 4px;
+	background: #ffffff;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	margin: 0 5px;
+}
+
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+	color: #fff;
+	border-radius: 20px;
+	height:40px;
+	width: 40px;
+	text-align: center;
+	border: 0.5px solid black;
+	font-weight: bold;
+
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+
+
+    .modal fade {
+    background-color: rgb(0, 0, 0, 1);
+        }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-list {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-list a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: verdana;
+}
+/* Change color of dropdown links on hover */
+.dropdown-list a:hover {
+    background-color: #ddd;
+}
+/* Show the dropdown list on hover */
+.dropdown:hover .dropdown-list {
+    display: block;
+}
+            #xyz {
+                appearance: none;
+                outline: 0;
+                background: #D0D0D0;
+                background-image: none;
+                width: 145px;
+                height: 30px;
+                color: #0275d8;
+                font-weight: 800;
+                cursor: pointer;
+                border: none;
+                padding: 0px 20px 0px;
+                border-radius: 7px;
+            }
+            #qp{
+            background:white; border:none; font-weight: bold; color:#0275d8; float:right;
+            }
+
+            .pagination{
+   margin-bottom:60px;
+}
+
+
+
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 2px 10px;
+   margin: 0 4px;
+   border: 2px solid #0275d8;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #0275d8;
+  color: white;
+  border: 2px solid #0275d8;
+}
+
+.pagination a:hover:not(.active) {
+background-color: #ddd;}
+
+
+
+
+
+
+</style>
+<div id="myModal"class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+                <h4 class="modal-title w-100"><b>Please connect at <a href="mailto:contact@profcess.com">contact@profcess.com </a> for getting paid candidate database </b></h4>
+               </div><br><br>
+			<div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" id="1d">
+    <div class="row justify-content-center">
+        <div id="searchForm" class="align-items-center">
+            <h1 class="my-3 text-center"><font color="#0275d8">Are You Looking For a Candidate?</font></h1>
+            <div class="tab-content" id="searchTabContent">
+                <div class=" fade show active" id="job" role="tabpanel" aria-labelledby="job-tab">
+                    <form class="form-inline" id="jobSearchForm" method="get">
+                        <div id="breadth" class="form-group">
+                            <label class="" for="jobs"></label>
+                            <input type="text" class="form-control bg-light flex-fill roundSideLeft roundSideRight" id="candidate breadth" name="q" placeholder="&#xf002;Search by Skills,Profession & Certification" style="font-family: 'Font Awesome 5 Free'; font-weight: 900;">
+                        </div>
+                        <div class="form-group" id="breadth1">
+                            <label class="" for="jobs"></label>
+                            <!--<input type="text" >-->
+                            <select class="form-control bg-light flex-fill roundSideLeft roundSideRight" id="candidate2 breadth" name="l" style="font-family: 'Font Awesome 5 Free'; font-weight: 900;">
+                                  <option disabled selected hidden>&#xf3c5; location</option>
+                                <option value="Agra">Agra</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Ajmer">Ajmer</option>
+                                <option value="Aligarh">Aligarh</option>
+                                <option value="Allahabad">Allahabad</option>
+                                <option value="Ambala">Ambala</option>
+                                <option value="Amritsar">Amritsar</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Bareilly">Bareilly</option>
+                                <option value="Bharatpur">Bharatpur</option>
+                                <option value="Bhilwara">Bhilwara</option>
+                                <option value="Bhojpur">Bhojpur</option>
+                                <option value="Bhopal">Bhopal</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Chhatarpur">Chhatarpur</option>
+                                <option value="Chitrakoot">Chitrakoot</option>
+                                <option value="Churu">Churu</option>
+                                <option value="Coimbatore">Coimbatore</option>
+                                <option value="Daman">Daman</option>
+                                <option value="Darbhanga">Darbhanga</option>
+                                <option value="Darjeeling">Darjeeling</option>
+                                <option value="Dehradun">Dehradun</option>
+                                <option value="Dholpur">Dholpur</option>
+                                <option value="Diu">Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Faridabad">Faridabad</option>
+                                <option value="Fatehabad">Fatehabad</option>
+                                <option value="Fatehpur">Fatehpur</option>
+                                <option value="Firozabad">Firozabad</option>
+                                <option value="Gandhinagar">Gandhinagar</option>
+                                <option value="Ganganagar">Ganganagar</option>
+                                <option value="Garhwa">Garhwa</option>
+                                <option value="Gaya">Gaya</option>
+                                <option value="Gautam Buddh Nagar">Gautam Buddh Nagar</option>
+                                <option value="Ghaziabad">Ghaziabad</option>
+                                <option value="Ghazipur">Ghazipur</option>
+                                <option value="Gurgaon">Gurgaon</option>
+                                <option value="Gwalior">Gwalior</option>
+                                <option value="Hamirpur">Hamirpur</option>
+                                <option value="Haridwar">Haridwar</option>
+                                <option value="Hissar">Hissar</option>
+                                <option value="Hooghly">Hooghly</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Jaipur">Jaipur</option>
+                                <option value="Jaisalmer">Jaisalmer</option>
+                                <option value="Jalandhar">Jalandhar</option>
+                                <option value="Jammu">Jammu</option>
+                                <option value="Jhansi">Jhansi</option>
+                                <option value="Jodhpur">Jodhpur</option>
+                                <option value="Kanchipuram">Kanchipuram</option>
+                                <option value="Kanpur">Kanpur</option>
+                                <option value="Kanyakumari">Kanyakumari</option>
+                                <option value="Kargil">Kargil</option>
+                                <option value="Kohima">Kohima</option>
+                                <option value="Kolhapur">Kolhapur</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Kota">Kota</option>
+                                <option value="Kottayam">Kottayam</option>
+                                <option value="Kozhikode">Kozhikode</option>
+                                <option value="Kurnool">Kurnool</option>
+                                <option value="Kurukshetra">Kurukshetra</option>
+                                <option value="Kutch">Kutch</option>
+                                <option value="Lalitpur">Lalitpur</option>
+                                <option value="Leh">Leh</option>
+                                <option value="Lucknow">Lucknow</option>
+                                <option value="Ludhiana">Ludhiana</option>
+                                <option value="Madurai">Madurai</option>
+                                <option value="Mainpuri">Mainpuri</option>
+                                <option value="Mathura">Mathura</option>
+                                <option value="Meerut">Meerut</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Muzaffarnagar">Muzaffarnagar</option>
+                                <option value="Mysore">Mysore</option>
+                                <option value="Nagpur">Nagpur</option>
+                                <option value="Nainital">Nainital</option>
+                                <option value="Nashik">Nashik</option>
+                                <option value="Nanital">Nanital</option>
+                                <option value="Pali">Pali</option>
+                                <option value="Panipat">Panipat</option>
+                                <option value="Patna">Patna</option>
+                                <option value="Pithoragarh">Pithoragarh</option>
+                                <option value="Pondicherry">Pondicherry</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Raigarh">Raigarh</option>
+                                <option value="Raipur">Raipur</option>
+                                <option value="Rajkot">Rajkot</option>
+                                <option value="Ramgarh">Ramgarh</option>
+                                <option value="Ranchi">Ranchi</option>
+                                <option value="Rohta">Rohta</option>
+                                <option value="Sambalpur">Sambalpur</option>
+                                <option value="Shimla">Shimla</option>
+                                <option value="Sikar">Sikar</option>
+                                <option value="Solapur">Solapur</option>
+                                <option value="Sonipat">Sonipat</option>
+                                <option value="Srinagar">Srinagar</option>
+                                <option value="Surat">Surat</option>
+                                <option value="Thane">Thane</option>
+                                <option value="Thrissur">Thrissur</option>
+                                <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                <option value="Tonk">Tonk</option>
+                                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                <option value="Udaipur">Udaipur</option>
+                                <option value="Udupi">Udupi</option>
+                                <option value="Ujjain">Ujjain</option>
+                                <option value="Uttarkashi">Uttarkashi</option>
+                                <option value="Vadodara">Vadodara</option>
+                                <option value="Varanasi">Varanasi</option>
+                                <option value="Vellore">Vellore</option>
+                                <option value="Visakhapatnam">Visakhapatnam</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="" for="searchBtn"></label>
+                            <button type="submit" id="breadth2" class="btn btn-primary flex-fill roundSideRight roundSideLeft" style="background-color:#0275d8;">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+<br>
+<br>
+
+    <div class="row">
+    <div class="col-sm-3">
+        <div class="container" id="2d">
+            <div class="accordian ">
+                  <div class="card">
+                      <div class="card-header roundSideRight roundSideLeft">
+
+                         <h4 style="margin-right:20px;"> <i class="fa fa-graduation-cap" aria-hidden="true" style="margin-right:60px;"></i>Education<span class="fa fa-minus" aria-hidden="true" style="margin-left:65px;"></span></h4>
+
+                      </div>
+                      <div class="card-body active">
+                          <form action="{% url 'recruiter:search_candidates' %}" method="post">
+                              {% csrf_token %}
+                              <label>Qualification/Eligibility</label>
+                              <input name="qual" type="text" placeholder="xyz"><br>
+                              <label>Year of Passout</label>
+                              <div class="row">
+                                  <div class="col">
+                                        <select name="pass1">
+                                            <option>Any</option>
+                                             <option>2017</option>
+                                             <option>2018</option>
+                                             <option>2019</option>
+                                             <option>2020</option>
+                                             <option>2021</option>
+                                        </select>
+
+                              </div>
+                               <div class="col">
+                                   <select name="pass2">
+                                            <option>Any</option>
+                                             <option>2017</option>
+                                             <option>2018</option>
+                                             <option>2019</option>
+                                             <option>2020</option>
+                                             <option>2021</option>
+                                        </select>
+
+                              </div>
+
+                              </div>
+                              <label>Qualification Marks</label><br>
+                                 <label>Percentage</label>
+                              <div class="row">
+
+                                   <div class="col">
+                                        <select name="perfrom">
+                                            <option>From</option>
+                                            <option>10%</option>
+                                            <option>20%</option>
+                                            <option>30%</option>
+                                            <option>40%</option>
+                                            <option>50%</option>
+                                            <option>60%</option>
+                                            <option>70%</option>
+                                            <option>80%</option>
+                                            <option>90%</option>
+                                            <option>100%</option>
+                                        </select>
+                                  </div>
+                                   <div class="col">
+                                       <select name="perto">
+                                            <option>To</option>
+                                            <option>10%</option>
+                                            <option>20%</option>
+                                            <option>30%</option>
+                                            <option>40%</option>
+                                            <option>50%</option>
+                                            <option>60%</option>
+                                            <option>70%</option>
+                                            <option>80%</option>
+                                            <option>90%</option>
+                                            <option>100%</option>
+                                        </select>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col">
+                                      <label>CGPA</label>
+                                  </div>
+                                   <div class="col">
+                                        <select name="cgpafrom">
+                                            <option>From</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                        </select>
+                                  </div>
+                                   <div class="col">
+                                       <select name="cgpato">
+                                            <option>To</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                        </select>
+                                  </div>
+                              </div>
+                              <button id="qp" type=reset> clear</button>
+
+
+                      </div>
+                  </div>
+
+            </div>
+
+            <div class="accordian">
+                  <div class="card">
+                      <div class="card-header">
+                         <h4><i class="fa fa-briefcase" style="margin-right:60px" aria-hidden="true"></i>Experience <span class="fa fa-minus" style="margin-left:60px;"></span></h4>
+
+                      </div>
+                      <div class="card-body active">
+
+                              <label>Experience</label>
+                              <div class="row">
+                                  <div class="col">
+                                      <select name="expfrom">
+                                          <option>Any</option>
+                                      </select>
+
+                              </div>
+                                  <div class="col">
+                                      <select name="expto">
+                                          <option>Any</option>
+                                      </select>
+
+                              </div>
+                              </div>
+                               <label>Salary</label>
+                              <div class="row">
+                                  <div class="col">
+                                      <select name="salmin">
+                                          <option>Any</option>
+                                      </select>
+
+                                     </div>
+                                  <div class="col">
+                                      <select name="salmax">
+                                          <option>Any</option>
+                                      </select>
+
+                                  </div>
+                              </div>
+                              <label>Designation</label>
+                              <input type="text" name="des" placeholder="Choose Your designation"><br>
+                              <label>Company</label>
+                              <input type="text" name="comp" placeholder="Type Your Company Name"><br>
+                               <button id="qp" type=reset> clear</button>
+
+                      </div>
+                  </div>
+            </div>
+
+        <div>
+            <div class="accordian">
+                  <div class="card">
+                      <div class="card-header">
+                         <h4><i class="fa fa-university .fa-fw" aria-hidden="true" style="margin-right:15px;"></i>College/Institution <span class="fa fa-minus" style="margin-left:45px;"></span></h4>
+
+                      </div>
+                      <div class="card-body active">
+
+                              <label>Show Candidates with college in</label>
+                              <input type="text" name="clgname" placeholder="Type College Location">
+                               <label>Candidates from Premium College</label>
+                               <input type="text" name="preclg" placeholder="Type College Name">
+                              <br>
+                              <button id="qp" type=reset> clear</button>
+
+                      </div>
+                  </div>
+            </div>
+        </div>
+        <div>
+            <div class="accordian">
+                  <div class="card">
+                      <div class="card-header">
+                         <h4><i class="fa fa-info-circle " aria-hidden="true" style="margin-right:20px;"></i>Additional Details <span class="fa fa-minus" style="margin-left:50px;"></span></h4>
+
+                      </div>
+                      <div class="card-body active">
+
+                             <div class="row">
+                                 <input type="radio" id="male" name="gender" value="male">
+                                 <label  for="male" class="col-sm-5">Male</label>
+                                      <input type="radio" id="female" name="gender" value="female">
+                                     <label for="female" class="col-sm-5">Female</label>
+                                     <input type="radio" id="other" name="gender" value="other">
+                                     <label for="other" class="col-sm-5">Other</label>
+
+                             </div>
+                             <label>English Rating</label>
+                             <select name="rate">
+                                 <option>Select English Rating</option>
+                             </select>
+                             <div class="row">
+                                 <div class="col">
+                             <label>Other Language</label>
+                                     </div>
+                                 <div class="col">
+                             <select name="lang">
+                                 <option>Select Language</option>
+                             </select>
+                                 </div>
+                             </div>
+                             <div class="row">
+                                 <div class="col">
+                             <label>Job Type</label>
+                                 </div>
+                                 <div class="col">
+                                     <div class="col">
+                             <select name="jtype">
+                                 <option>Select Job Type</option>
+                             </select>
+                                         </div>
+                                     </div>
+                             </div>
+                             <label>Show Candidate With</label>
+                             <br>
+                              <input type="checkbox" >
+                             <label>Mobile Number Verified</label>
+                             <br>
+                             <input type="checkbox" >
+                             <label>Email Verified</label>
+                             <br><input type="checkbox" >
+                             <label>Attached Resume</label>
+                             <br>
+                             <button id="qp" type=reset> clear</button>
+
+                      </div>
+
+                  </div>
+            </div>
+        </div>
+            <div>
+            <div class="accordian">
+
+                      <div class="card-header">
+                          <h4><button type="submit" class="btn" style="background-color: #0275d8; font-size:16px; color: white; padding: 5px 40px; margin-top: 15px;margin-left:50px;border-radius:20px;">Apply</button> </h4>
+
+                      </div>
+                </form>
+                </div>
+                </div>
+    </div>
+</div>
+
+
+<div class="col">
+    <div class="container" style="margin-bottom:-25px;">
+    <div class="row">
+        <div class="col">
+            <select id="xyz">
+                <option><a href="{% url 'recruiter:search_candidates' %}"><font color="blue">All Candidates</font></a></option>
+                <option><a href="#"><font color="blue">Freshers</font></a></option>
+                <option><a href="#"><font color="blue">Search By</font></a></option>
+            </select>
+        </div>
+        <div class="col">
+            <label><font color="#606060" style="calibri"><b>Last Active</font></label>
+            <select id="xyz" style="width: 112px;">
+                <option><font color="blue">1 month</font></option>
+                <option><font color="blue">2 month</font></option>
+                <option><font color="blue">3 month</font></option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+ {% if m %}
+        <div class="card-body bg-transparent border-primary mt-1 ">
+            <ul class="list-group">
+                {% for c in m %}
+                <div class="container-fluid mt-4"  >
+       <div  style="border: 2px solid #0275d8;
+              border-bottom: 20px solid #0275d8;
+ 			border-radius: 20px;
+            margin-bottom:3px;
+            margin-top:0px;
+            margin-left:-55px;
+            ">
+          <div class="card-body " >
+
+              <div class="row">
+                    <div class="col-lg-2 d-flex justify-content-center ">
+                        {% if request.user.applicantuserprofile.profile_pic %}
+                        <img src="{{ request.user.applicantuserprofile.profile_pic.url }}" style="border-radius: 50%" height="150" width="150">
+                        {% else %}
+                        <img class="img-circle"
+                                                 src="{% static 'dashboard/img/theme/person.png' %}"
+                                                 style="margin-left:100px;"
+                                                class="img-thumbnail"
+                                                 alt="profile">
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12" style="margin-left:40%">
+
+                            <h1 style="font-size: 20px; font-weight:bold;">{{ c.user.first_name }}  {{ c.user.last_name }}</h1>
+                            <p>{{c.description}}</p>
+                            <p><i class="fa fa-map-marker .fa-fw" aria-hidden="true"> {{c.location}}</i></p>
+                      </div>
+                    </div>
+                  <div class="col">
+                  <div class="col-lg-12">
+                    <div class="float-right">
+                     <ul style="list-style-type:none;">
+                         <li><a href="{% url 'recruiter:applicant_detail' pk=c.pk %}" ><button type="button" class="btn btn-warning" style="border-radius: 20px; height:30px; padding:0px 10px 0px; width:100px; ">Details</button></a></li>
+                         {% if c not in can %}
+                         <li><br><a href="{% url 'recruiter:can' pk=c.pk %}" ><button type="button" class="btn btn-primary float-right" onclick="myFunction()" style="border-radius: 20px; height:30px; padding:0px 10px 0px; width:100px;">Shortlist</button></a></li>
+                         {% else %}
+                         <li><br><a href="{% url 'recruiter:can' pk=c.pk %}" ><button type="button" class="btn btn-primary float-right" onclick="myFunction()" style="border-radius: 20px; height:30px; padding:0px 10px 0px; width:100px;">Shortlisted</button></a></li>
+                         {% endif %}
+                         <li><br><a  href="{{ c.profile_resume.url }}"  download="{{ c.profile_resume.url }}">
+                                <button type="button" style="border-radius: 20px; padding:0px 10px 0px; width:100px;" class="btn  btn-primary float-right mt-3"><i class="fa fa-download"></i> Download Resume</button>
+                            </a></li>
+                     </ul>
+                     </div>
+                     </div>
+                </div>
+
+                  </div>
+
+              </div>
+
+              <div class="row">
+                  <div class="col" style="margin-left:10px;">
+                      <h3 class="getVal">Education: {{c.school_degree}}</h3>
+                      <h3>Skills: {{ c.skill_info }}</h3>
+                      <h3>Work History</h3>
+                      <h3>Language</h3>
+                  </div>
+              </div>
+        </div>
+    </div>
+
+
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="card-header bg-transparent border-0">
+                <span> NO result found</span>
+            </div>
+            {% endif %}
+            </div>
+
+{% if not post_req %}
+    {% if m.has_other_pages %}
+        <ul class="pagination">
+        {% if m.has_previous %}
+            <li><a id= "link1" href="?page={{ m.previous_page_number }}&q={{q}}&l={{l}}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled" style="border: 2px solid grey; padding: 2px 10px;margin: 0 4px;"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in m.paginator.page_range %}
+            {% if m.number == i %}
+                <li class="active" style="border: 2px solid grey; padding: 2px 10px;margin: 0 4px;"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                {%if paid %}
+                    <li><a href="?page={{ i }}&q={{q}}&l={{l}}">{{ i }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'recruiter:search_candidates' %}">{{ i }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if m.has_next and paid %}
+            <li><a id= "link3" href="?page={{ m.next_page_number }}&q={{q}}&l={{l}}">&raquo;</a></li>
+        {% elif not paid %}
+            <li><a  href="{% url 'recruiter:search_candidates' %}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled" style="border: 2px solid grey; padding: 2px 10px;margin: 0 4px;"><span>&raquo;</span></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+{% else %}
+    {% if m.has_other_pages %}
+        <ul class="pagination">
+        {% if m.has_previous %}
+            <li><a id= "link1" href="?page={{ m.previous_page_number }}&posted=True&qual={{qual}}&pass1={{pass1}}&pass2={{pass2}}&perfrom={{perfrom}}&perto={{perto}}&cgpafrom={{cgpafrom}}&cgpato={{cgpato}}&expfrom={{expfrom}}&expto={{expto}}&salmin={{salmin}}&salmax={{salmax}}&des={{des}}&comp={{comp}}&clgname={{clgname}}&preclg={{preclg}}&gender={{gender}}&rate={{rate}}&lang={{lang}}&jtype={{jtype}}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled" style="border: 2px solid grey; padding: 2px 10px;margin: 0 4px;"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in m.paginator.page_range %}
+            {% if m.number == i %}
+                <li class="active" style="border: 2px solid grey; padding: 2px 10px;margin: 0 4px;"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                {%if paid %}
+                    <li><a href="?page={{ i }}&posted=True&qual={{qual}}&pass1={{pass1}}&pass2={{pass2}}&perfrom={{perfrom}}&perto={{perto}}&cgpafrom={{cgpafrom}}&cgpato={{cgpato}}&expfrom={{expfrom}}&expto={{expto}}&salmin={{salmin}}&salmax={{salmax}}&des={{des}}&comp={{comp}}&clgname={{clgname}}&preclg={{preclg}}&gender={{gender}}&rate={{rate}}&lang={{lang}}&jtype={{jtype}}">{{ i }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'recruiter:search_candidates' %}">{{ i }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if m.has_next and paid %}
+            <li><a href="?page={{ m.next_page_number }}&posted=True&qual={{qual}}&pass1={{pass1}}&pass2={{pass2}}&perfrom={{perfrom}}&perto={{perto}}&cgpafrom={{cgpafrom}}&cgpato={{cgpato}}&expfrom={{expfrom}}&expto={{expto}}&salmin={{salmin}}&salmax={{salmax}}&des={{des}}&comp={{comp}}&clgname={{clgname}}&preclg={{preclg}}&gender={{gender}}&rate={{rate}}&lang={{lang}}&jtype={{jtype}}">&raquo;</a></li>
+        {% elif not paid %}
+            <li><a  href="{% url 'recruiter:search_candidates' %}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled" style="border: 2px solid grey; padding: 2px 10px;margin: 0 4px;"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+{% endif %}
+
+        </div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+	  $(".card-header").click(function(){
+       // self clicking close
+       if($(this).next(".card-body").hasClass("active")){
+         $(this).next(".card-body").removeClass("active").slideUp()
+        $(this).children("span").removeClass("fa-minus").addClass("fa-plus")
+       }
+     else{
+	   $(".card .card-body").removeClass("active").slideUp()
+	   $(".card .card-header span").removeClass("fa-minus").addClass("fa-plus");
+       $(this).next(".card-body").addClass("active").slideDown()
+        $(this).children("span").removeClass("fa-plus").addClass("fa-minus")
+      }
+	  })
+	})
+
+</script>
+<script type="text/javascript">
+
+    var tag=document.getElementsByClassName("getVal");
+    for(let i=0;i<tag.length;i++)
+    {
+        let inText=tag[i].innerText;
+        inText=inText.replace("[","");
+        inText=inText.replace("]","");
+        inText=inText.replaceAll("\"","");
+        tag[i].innerText=inText;
+    }
+    var space=document.getElementsByClassName("form-control");
+    for(let i=0;i<space.length;i++)
+    {
+        space[i].style.width="260px";
+    }
+    var navItem = document.getElementsByClassName("nav-item");
+    for (var i = 0; i < navItem.length; i++) {
+        navItem[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("activated");
+            current[0].className = current[0].className.replace("activated", "");
+            this.className += " activated";
+        });
+    }
+    function myFunction() {
+  alert("Candidate is Shortlisted!Please view my candidate screen");
+
+}
+
+</script>
+{% endblock %}

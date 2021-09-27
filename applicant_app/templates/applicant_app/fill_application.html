@@ -1,0 +1,8 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<h1>
+    Kindly complete your profile here
+    <br>
+    <a href="{% url 'applicant:create_applicant_profile'  %}"><button class="btn btn-primary"><b>Complete Profile -></b></button></a>
+</h1>
+{% endblock content %}

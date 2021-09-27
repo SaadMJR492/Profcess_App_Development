@@ -1,0 +1,120 @@
+{% extends 'base1.html' %} {% block content %}
+
+{% comment %} added my Manoj {% endcomment %}
+{% for n1 in mypost_list %}
+{%if forloop.counter < 2 %}
+<div class="super-container">
+	<div class="profile-container">
+		<a href="/social/myprofile"><i class="fa fa-arrow-circle-left back-icon" aria-hidden="true"></i></a>
+
+		<div class="cover_pic">
+			<img src="../../../static/images/images/cover.jpg" alt="cover pic" />
+		</div>
+		<div class="profile-card">
+			<i class="fas fa-ellipsis-h"></i>
+			<div class="profile-card-intro">
+				<div class="profile-pic">
+					<img src="{{n1.uploaded_by.user_id.applicantuserprofile.profile_pic.url}}" alt="profile_pic" />
+				</div>
+				<div class="profile-intro">
+					<h1>
+						{{n1.uploaded_by.user_id.first_name}} {{n1.uploaded_by.user_id.last_name}}
+					</h1>
+					<div class="profile-intro-inner">
+						<small>{{n1.uploaded_by.user_id}}</small>
+						<small> {{n1.uploaded_by.user_id.applicantuserprofile.description}}</small>
+					</div>
+					<div class="profile-rating">
+						<p>O O O O O O O O O O O</p>
+					</div>
+				</div>
+			</div>
+			<div class="profile-links">
+
+				<a href="#">Follow +</a>
+				<a href="#">Profile Summary</a>
+				<a href="#">Message</a>
+				<a href="#">Resume</a>
+			</div>
+		</div>
+		{%endif%}
+		{% endfor %}
+
+		<div class="profile-stats">
+			<div class="profile-stats-inner">
+				<h2>{{follower_count}}</h2>
+				<small>Followers</small>
+			</div>
+			<div class="divider"></div>
+			<div class="profile-stats-inner">
+				<h2>{{following_count}}</h2>
+				<small>Following</small>
+			</div>
+			<div class="divider"></div>
+			<div class="profile-stats-inner">
+				<h2>{{mypost_list.count}}</h2>
+				<small>Post</small>
+			</div>
+		</div>
+		<br />
+		<div class="profile-heading">
+			<p>Achievement and Professionals</p>
+		</div>
+		<div class="profile-user-personal-info">
+			<i class="fas fa-trophy fa-3x"></i>
+			<i class="fas fa-award fa-3x"></i>
+			<i class="fas fa-medal fa-3x"></i>
+			<i class="fas fa-certificate fa-3x"></i>
+			<i class="fas fa-university fa-3x"></i>
+			<i class="fas fa-laptop-code fa-3x"></i>
+		</div>
+
+		<div class="profile-heading-hobby">
+			<p>Hobbies and Personal</p>
+		</div>
+		<div class="profile-user-personal-info">
+			<i class="fas fa-biking fa-3x"></i>
+			<i class="fas fa-gamepad fa-3x"></i>
+			<i class="fas fa-guitar fa-3x"></i>
+			<i class="fas fa-headphones fa-3x"></i>
+			<i class="fas fa-plane fa-3x"></i>
+			<i class="fas fa-swimming-pool fa-3x"></i>
+		</div>
+		<div class="profile-toggle">
+			<div id="btn"></div>
+			<button type="button" id="btn-post" class="profile-toggle-btn" onclick="post();">
+				Posts
+			</button>
+			<button type="button" id="btn-tagged" class="profile-toggle-btn" onclick="tagged();">
+				Tagged
+			</button>
+		</div>
+
+		<div class="profile-posts">
+			{% for n in mypost_list %}
+			<div class="profile-post">
+				<img src="{{n.pic.url}}" alt="post" />
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<script>
+	var btn_post = document.getElementById("btn");
+	var id_btn_post = document.getElementById("btn-post");
+	var id_btn_tagged = document.getElementById("btn-tagged");
+	function post() {
+		btn_post.style.left = "0";
+		id_btn_post.style.color = "rgb(0, 65, 153)";
+		id_btn_tagged.style.color = "white";
+	}
+
+	function tagged() {
+		id_btn_tagged.style.color = "rgb(0, 65, 153)";
+		id_btn_post.style.color = "white";
+		btn_post.style.left = "250px";
+	}
+</script>
+
+{% comment %} end of added my Manoj {% endcomment %}
+{% endblock %}

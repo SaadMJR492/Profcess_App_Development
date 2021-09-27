@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+<!-- Masthead-->
+<header class="signUp">
+     <form method="POST" class="form">
+          {% csrf_token %}
+          <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+            <script type="text/javascript">
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+                })
+            </script>
+          <div class="container">
+               <div class="row justify-content-center">
+                    <div class="col-md-6 formDesign">
+                         <div class="form-row">
+                              <div class="col">
+                                   <h4>Join Prof-Cess</h4>
+                                   <h4 class="text-dark">it's free!</h4>
+                              </div>
+                         </div>
+                         <div class="form-group row justify-content-center">
+                              {% if form.errors %} {% for field in form %} {% for error in field.errors %}
+                              <div class="m-1"></div>
+                              <div
+                                   style="border-radius: 8px"
+                                   class="col-11 alert alert-danger"
+                              >
+                                   {{ error }}
+                              </div>
+                              <div class="m-1"></div>
+                              {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+                              <div class="col-12 p-3 bg-danger">
+                                   <p>{{ error }}</p>
+                                   {{ form.phone }}
+                              </div>
+                              {% endfor %} {% endif %}
+                         </div>
+                         <div class="form-group row">
+                              <div class="col">
+                                   <label for="id_{{ form.username.name }}"
+                                        >{{ form.username.label }}:</label
+                                   >
+                                   <input
+                                        class="form-control"
+                                        type="email"
+                                        name="{{ form.username.name }}"
+                                        required
+                                        id="id_{{ form.username.name }}"
+                                         data-toggle="tooltip" data-placement="top" title="Enter username, Your username should be your email id"
+                                   />
+                              </div>
+                         </div>
+                         <div class="form-group row">
+                              <div class="col">
+                                   <label for="id_{{ form.email.name }}">{{ form.email.label }}:</label>
+
+                                   <input
+                                        class="form-control"
+                                        type="email"
+                                        name="{{ form.email.name }}"
+                                        required
+                                        id="id_{{ form.email.name }}"
+                                        data-toggle="tooltip" data-placement="top" title="Please Enter Your Valid E-mail Here  "
+                                   />
+                              </div>
+                         </div>
+                         <div class="form-group row">
+                              {% for i in form %} {% if i.name in "password1, password2" %}
+                              <div class="col-6">
+                                   <label for="id_{{ i.name }}">
+                                        {{ i.label }}:</label>
+
+                                   <div class="input-group mb-3">
+                                        <input
+                                             class="form-control passwordInput"
+                                             type="password"
+                                             name="{{ i.name }}"
+                                             required
+                                             id="id_{{ i.name }}"
+                                             data-toggle="tooltip" data-placement="top" title="Enter Your Password
+                                              --Your passowrd should not be very common
+                                              --Password should contain a number and a alphabet
+                                             --Password should be atleast of length 8"
+                                        />
+
+                                        <div id="{{ i.name }}"
+                                             class="input-group-append">
+                                             <span class="input-group-text"><i
+                                                       id="eye_{{ i.name }}"
+                                                       class="fa"></i></span>
+                                        </div>
+                                   </div>
+                              </div>
+                              {% endif %} {% endfor %}
+                         </div>
+                         <div class="form-group row">
+                              {% for i in form %} {% if i.name in "first_name, last_name, company_name,college_name,college_name_stu" %}
+                              <div class="col-6">
+                                   <label for="id_{{ i.name }}"
+                                        >{{ i.label }}:</label
+                                   >
+                                   <input
+                                        class="form-control"
+                                        type="text"
+                                        name="{{ i.name}}"
+                                        required
+                                        id="id_{{ i.name }}"
+                                        data-toggle="tooltip" data-placement="top" title="Please Enter your {{i.label }} here"
+                                   />
+                              </div>
+                              {% endif %} {% endfor %}
+                              <div class="col-6">
+                                   <label for="id_{{ form.phone.name }}"
+                                        >{{ form.phone.label }}:</label
+                                   >
+                                   <input
+                                        class="form-control mobile-number"
+                                        type="tel"
+                                        name="{{ form.phone.name}}"
+                                        required
+                                        id="id_{{ form.phone.name }}"
+                                        placeholder="e.g. +1 702 123 4567"
+                                        data-toggle="tooltip" data-placement="top"  title="Enter phone number and select country code from options in dropdown"
+                                   />
+                              </div>
+                         </div>
+                         <p>{{ form.is_termnsandconditions }}Agree to terms and condition</p>
+
+
+
+                         <div class="form-group row">
+                              <div class="col">
+                                   <p>
+                                        By clicking "Sign In" you agree with
+                                        Prof-Cess's
+                                        <a href="privacy.html" target="_blank"
+                                             >privacy policy</a
+                                        >
+                                        and
+                                        <a href="terms.html" target="_blank"
+                                             >terms of use</a
+                                        >
+                                   </p>
+                                   <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                   >
+                                        Sign Up
+                                   </button>
+                                   <br>
+                                   <br>
+                                   <a class="btn btn-primary"
+                                         href= "{% provider_login_url 'google' %}" >  Google Sign Up</a>
+                                   <br><br>
+                                   <a   class="btn btn-primary"
+                                         href= "{% provider_login_url 'linkedin_oauth2' %}">  Linkedin Sign Up</a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </form>
+</header>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/6.4.1/js/intlTelInput.min.js"></script>
+<script type="text/javascript">
+     $(".mobile-number").intlTelInput({d:"in"});
+     let field_values=["{{ form.username.value }}", "{{ form.email.value }}","{{ form.password1.value }}","{{ form.password2.value }}","{{ form.first_name.value }}","{{ form.last_name.value }}","{{ form.company_name.value }}","{{ form.phone.value }}","{{ form.college_name.value }}"];
+     let field_names=["id_{{ form.username.name }}", "id_{{ form.email.name }}","id_{{ form.password1.name }}","id_{{ form.password2.name }}","id_{{ form.first_name.name }}","id_{{ form.last_name.name }}","id_{{ form.company_name.name }}","id_{{ form.phone.name }}","id_{{ form.college_name.name }}"]
+     for(let i=0;i<field_names.length;i++)
+     {    if(field_values[i]!=="" && field_values[i]!==null && field_names[i]!=="id_" && field_names[i]!==null && field_values[i]!="None")
+               document.getElementById(field_names[i]).value=field_values[i];
+     }
+     $("#id_{{ form.username.name }}").on('keyup',function(){
+             $("#id_{{ form.email.name }}").val($(this).val());
+        });
+</script>
+{% endblock %}

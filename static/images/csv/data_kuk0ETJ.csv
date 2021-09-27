@@ -1,0 +1,3 @@
+id,Username,email,Usertype,Password,Confirm Pass
+103,ibm,i@gmail.com,Applicant,newuser123,newuser123
+104,azure,a@gmail.com,Applicant,newuser124,newuser124

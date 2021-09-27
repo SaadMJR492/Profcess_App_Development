@@ -1,0 +1,427 @@
+{% extends "dashboard.html" %}{% load static %}
+{% block content %}
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" src="mystyle.css">
+
+ 	<style type="text/css">
+ 		.card{
+ 			border-radius: 20px;
+ 			background-color: #f6f6f6;
+ 		}
+ 		hr
+ 		{
+ 			border: 1px solid black;
+ 		}
+ 		body
+ 		{
+ 			background-color: #f6f6f6;
+ 		}
+ 		.numberCircle {
+		    border-radius: 50%;
+		    width: 100px;
+		    height: 100px;
+		    padding: 30px;
+
+		    background-color: blue;
+		    border: 2px solid #666;
+		    color: #fff;
+		    text-align: center;
+
+		    font: 32px Arial, sans-serif;
+		}
+
+
+ 	</style>
+	<!-- dashboard title -->
+
+	<div class="container-fluid  text-center" style="background-color: #0052cc;">
+		<h3 class="p-3" style="color: white"><b>DASHBOARD</b></h3>
+	</div>
+
+	<!-- body -->
+
+	<div class="container-fluid mt-4">
+		<div class="row">
+
+			<div class="col-sm-6 ">
+				<div class="row">
+				<!-- user profile  -->
+					<div class="col-sm-6">
+						<div class="card" >
+							<div class="card-body">
+								<div class="row">
+                                    <div class="col-lg-3 order-lg-2">
+                              <div class="card-profile-image">
+                                   {% if request.user.recruiteruserprofile.profile_pic.url == "" %}
+                                   <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+                                        <img
+                                             src="{% static 'dashboard/img/theme/person.png' %}"
+                                             class="rounded-circle"
+                                             alt="profile"
+                                        />
+                                        <img src="{{ url }}" alt="" />
+                                   </a>
+                                   {% else %}
+                                   <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+                                        <img
+                                             src="{{ request.user.recruiteruserprofile.profile_pic.url }}"
+                                             class="rounded-circle"
+                                             alt="profile"
+                                        />
+                                        <img src="{{ url }}" alt="" />
+                                   </a>
+                                   {% endif %}
+                              </div>
+                         </div>
+									<div class="col-xs-8 col-sm-8">
+										<b>USERNAME</b>
+										<p>UX/UI Designer</p>
+										<div class="progress" >
+										  <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+										</div>
+									</div>
+								</div>
+								<div class="mt-2">
+									<p><span class="fa fa-list-alt"></span> Applied for <hr></p>
+									<div class="card mt-1" style="background-color:#3385ff; color: white">
+										<div class="card-header">
+											<div class="row">
+												<div class="col-sm-2">
+													<span class="fa fa-adjust"></span>
+												</div>
+												<div class="col-sm-8">
+													<b>Profcess</b>
+													<p>UX/UI Designer</p>
+												</div>
+												<span class="fa fa-navicon"></span>
+											</div>
+										</div>
+									</div>
+									<div class="card mt-1" style="background-color: #3385ff; color: white">
+										<div class="card-header">
+											<div class="row">
+												<div class="col-sm-2">
+													<span class="fa fa-adjust"></span>
+												</div>
+												<div class="col-sm-8">
+													<b>Profcess</b>
+													<p>UX/UI Designer</p>
+												</div>
+												<span class="fa fa-navicon"></span>
+											</div>
+										</div>
+									</div>
+									<div class="card mt-1" style="background-color:#3385ff; color: white">
+										<div class="card-header">
+											<div class="row">
+												<div class="col-sm-2">
+													<span class="fa fa-adjust"></span>
+												</div>
+												<div class="col-sm-8">
+													<b>Profcess</b>
+													<p>UX/UI Designer</p>
+												</div>
+												<span class="fa fa-navicon"></span>
+											</div>
+										</div>
+									</div>
+									<div class="card mt-1" style="background-color:#3385ff; color: white">
+										<div class="card-header">
+											<div class="row">
+												<div class="col-sm-2">
+													<span class="fa fa-adjust"></span>
+												</div>
+												<div class="col-sm-8">
+													<b>Profcess</b>
+													<p>UX/UI Designer</p>
+												</div>
+												<span class="fa fa-navicon"></span>
+											</div>
+										</div>
+									</div>
+									<div class="card mt-1" style="background-color:#3385ff; color: white">
+										<div class="card-header">
+											<div class="row">
+												<div class="col-sm-2">
+													<span class="fa fa-adjust"></span>
+												</div>
+												<div class="col-sm-8">
+													<b>Profcess</b>
+													<p>UX/UI Designer</p>
+												</div>
+												<span class="fa fa-navicon"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+				<!-- skill -->
+		    <div class="col-sm-6">
+			    <div class="card">
+			      <div class="card-body b-skills">
+			        <h5 class="card-title"><b>Skill</b></h5>
+			     	<div class="row text-center">
+						<div class="col-sm-4">
+						    <div class="progressbar">
+				            <div class="second circle" data-percent="77">
+				              <strong>52%</strong>
+				              <span>animation <br> progress</span>
+				            </div>
+				            </div>
+						</div>
+
+						<div class="col-sm-4">
+						    <div class="progressbar">
+				            <div class="second circle" data-percent="55">
+				              <strong>52%</strong>
+				              <span>animation <br> progress</span>
+				            </div>
+				            </div>
+						</div>
+
+						<div class="col-sm-4">
+						    <div class="progressbar">
+				            <div class="second circle" data-percent="100">
+				              <strong>52%</strong>
+				              <span>animation <br> progress</span>
+				            </div>
+				            </div>
+						</div>
+					</div>
+
+			      </div>
+			    </div>
+			     <div class="card mt-4">
+			      <div class="row p-3">
+			      	<!-- skill card -->
+			      	<div class="col-sm-7">
+			      		<div class="card-title"><b>SKILL</b> <span class="fa fa-edit"></span></div>
+			      		<div class="row">
+			      			<div class="col-sm-4">
+			      				Java
+			      			</div>
+			      			<div class="col-sm-8">
+			      				<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+			      			</div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="col-sm-4">
+			      				Java
+			      			</div>
+			      			<div class="col-sm-8">
+			      				<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+			      			</div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="col-sm-4">
+			      				Java
+			      			</div>
+			      			<div class="col-sm-8 ">
+			      				<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+			      			</div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="col-sm-2 col-md-4">
+			      				Java
+			      			</div>
+			      			<div class="col-sm-2 col-md-8">
+			      				<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+			      			</div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="col-sm-4">
+			      				Java
+			      			</div>
+			      			<div class="col-sm-8">
+			      				<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+			      			</div>
+			      		</div>
+			      	</div>
+			      	<div class="col-sm-4">
+			      		<div class="card-title"><b>Total Job Applied</b></div>
+			      		<div class="numberCircle">32</div>
+			      	</div>
+			      </div>
+			    </div>
+			   <!--  profile rating -->
+			    <div class="card mt-4 text-center">
+			      <div class="card-body">
+			        <h4 class="card-title"><b>PROFILE RATING</b></h4>
+			           <div class="progressbar p-5">
+				            <div class="second circle" data-percent="77">
+				              <strong>52%</strong>
+				              <span>animation <br> progress</span>
+				            </div>
+				        </div>
+			      </div>
+			    </div>
+			</div>
+
+			</div>
+			</div>
+
+
+			<div class="col-sm-6">
+				<div class="row">
+					<!-- tips -->
+					<div class="col-sm-6">
+					    <div class="card">
+					      <div class="card-body">
+					        <h5 class="card-title"><b>TIPS</b></h5>
+					        <p class="card-text">
+					        	80% of candidate selectes know javascript with HTML and CSS Learn javascript to increase your selectio probability
+					        </p>
+					      </div>
+					    </div>
+
+					    <div class="row mt-4">
+					    	<!-- your hiring -->
+					    	<div class="col-sm-6">
+					    		 <div class="card text-center" style="border-bottom-right-radius: 100px; border-bottom-left-radius: 100px; color: blue; ">
+								      <div class="card-body">
+								        <h5 class="card-title">Your Hiring</h5>
+								        <p class="card-text " style="color: blue">
+								        	<h2>28.12</h2>
+								        	Percenteage
+								        </p>
+								      </div>
+					             </div>
+					    	</div>
+					    	<!-- saved  -->
+					    	<div class="col-sm-6">
+					    		 <div class="card  text-center" style="border-bottom-right-radius: 100px; border-bottom-left-radius: 100px;color: blue">
+								      <div class="card-body">
+								        <h5 class="card-title">Saved</h5>
+								        <p class="card-text" >
+								        	<h2>09</h2>
+								        	Jobs
+								        </p>
+								      </div>
+					             </div>
+					    	</div>
+					    </div>
+					<!--   hightest job ratio  -->
+				    </div>
+				    <div class="col-sm-6">
+					    <div class="card">
+					      <div class="card-body">
+					        <b><p class="card-title text-center">Highest Job Ratio(in your Doamin)</p></b>
+					        <div id="piechart" style=" height: 300px;"></div>
+					      </div>
+					    </div>
+				    </div>
+				    <!-- prefered job card -->
+					<div class="card mt-4 w-100">
+				      <div class="card-body">
+				        <h5 class="card-title"><b>PREFELABLE JOB FOR YOU</b></h5>
+				        <div class="row">
+				        	<div class="col-sm-4">
+				        		<h3>JOB TITLE</h3>
+				        		<p>Company Name</p>
+				        	</div>
+				        	<div class="col-sm-4 text-center">
+				        		<dl>
+				        			<dd>300000-350000 LPA</dd>
+				        			<dd>Experience: 1-3 year</dd>
+				        			<dd>Duration: 3 month</dd>
+				        		</dl>
+				        	</div>
+				        	<div class="col-sm-4">
+				        		<div class="row">
+									<div class="col-sm-5 ">
+										<img src="default.png" style="border-radius: 50%" height="80" width="80">
+									</div>
+									<div class="col-sm-7 ">
+										<button type="button" class="btn btn-primary " style="border-radius: 20px;">Apply</button>
+										<button type="button" class="btn btn-warning mt-2" style="border-radius: 20px;">Save</button>
+									</div>
+								</div>
+				        	</div>
+				        </div>
+				        <hr>
+				        <div class="row">
+				        	<div class="col-sm-4">
+				        		<h3>JOB TITLE</h3>
+				        		<p>Company Name</p>
+				        	</div>
+				        	<div class="col-sm-4 text-center">
+				        		<dl>
+				        			<dd>300000-350000 LPA</dd>
+				        			<dd>Experience: 1-3 year</dd>
+				        			<dd>Duration: 3 month</dd>
+				        		</dl>
+				        	</div>
+				        	<div class="col-sm-4">
+				        		<div class="row">
+									<div class="col-sm-5 ">
+										<img src="default.png" style="border-radius: 50%" height="80" width="80">
+									</div>
+									<div class="col-sm-7 ">
+										<button type="button" class="btn btn-primary " style="border-radius: 20px;">Apply</button>
+										<button type="button" class="btn btn-warning mt-2" style="border-radius: 20px;">Save</button>
+									</div>
+								</div>
+				        	</div>
+				        </div>
+				      </div>
+				    </div>
+				</div>
+
+				</div>
+	    </div>
+	</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.js"></script>
+ -->
+	<!-- chart -->
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock content %}
+
+
+
+	 <!-- Required meta tags -->

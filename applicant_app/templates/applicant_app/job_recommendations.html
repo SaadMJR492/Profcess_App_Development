@@ -1,0 +1,53 @@
+
+{% extends "dashboard.html" %}
+{% block content %}
+<h1>
+    Your Recommended Jobs
+</h1>
+ {% if jobs %}
+<div class="card-body bg-transparent border-0">
+                         <ul class="list-group list-group-flush">
+                                {%for job in jobs %}
+                                  <div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                                  transition: 0.3s;
+                                  width: 100%;
+                                  border-radius: 5px;">
+                                    <a href="{% url 'applicant:job_detail' pk=job.pk %}">
+                                        <li class="list-group-item">{{ job.job_title }}</li>
+                                    </a>
+                                    <div class="media-body">
+                                                    <span class="pl-2 text-sm">Job Salary: {{ job.job_salary }}</span><br>
+                                                    <span class="pl-2 text-sm">Company name: {{job.company_name}}</span><br>
+                                                    <span class="pl-2 text-sm">Type of Job :{{job.type_of_job}}</span><br>
+                                                    <span class="pl-2 text-sm">job Location :{{job.job_location}}</span><br>
+                                                    <span class="pl-2 text-sm">job Requirements: {{job.job_requirements}}</span>
+
+                                    </div>
+                                      <div style="margin-left:60%">
+                                      <a href="{% url 'applicant:applytojob' pk=job.pk %}">
+                                          <button type="button" style="left-margin:20px" class="btn btn-primary mb-3">Apply Now</button>
+                                      </a>
+
+                                      <a  href="{% url 'applicant:shortlist_job' %}">
+                                          <button type="button" style="background-color:#FF7F50" class="btn btn-primary mb-3">Save</button>
+                                      </a>
+                                      </div>
+
+
+                                  </div>
+                             <br>
+
+                            </ul>
+
+                                {% endfor %}
+                        {% else %}
+                        <div class="card-header bg-transparent border-0">
+                        <span> NO result found</span>
+                    </div>
+    {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock content %}

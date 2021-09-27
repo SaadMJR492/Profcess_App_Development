@@ -1,0 +1,116 @@
+ {% load static %}
+body {
+  font-family: 'Montserrat';
+  background-color: 	rgb(75,0,130);
+
+
+}
+p{
+  opacity: 0.5;
+}
+.jumbotron-fluid{
+  background-color:  rgba(105, 68, 178, 1);
+  text-align: right !important;
+  padding-right: 3em !important;
+  padding-top: 8em !important;
+  color: #fff !important;
+  height: 20em !important;
+}
+
+.sidenav {
+  height: 100%;
+  width: 22%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: 	 #6944b2;
+  background-image:  url("images/intro.svg");
+  overflow-x: hidden;
+  padding-top: 7%;
+  padding-left: 4%;
+}
+
+.sidenav a {
+  padding: 6px 18px 36px 16px;
+  text-decoration: none;
+  font-size: 1.3em;
+  color: #fff;
+  display: block;
+}
+
+
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 100px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.socialIcons {
+  padding: 1;
+  text-align: center;
+  position: absolute;
+  top: 77%;
+  right: 10%;
+  font-family: 'Montserrat';
+}
+
+
+
+.socialIcons .A {
+  display: block;
+  padding: 0.2em;
+  min-width: 2em;
+  max-width: 2em;
+  height: 2em;
+  white-space: nowrap;
+  line-height: 0.5em; /*it's working only when you write text with icon*/
+  transition: 0.5s;
+  text-decoration: none;
+  font-family: 'Montserrat';
+
+  color: rgb(0,0,0);
+}
+
+.socialIcons  .plus .fa-plus {
+  margin-right: 0.8em;
+  padding: 0.4em;
+
+
+}
+
+.socialIcons  .plus:hover .A {
+  max-width: 500px;
+  padding-right: 1em;
+}
+
+.socialIcons .plus {
+  background-color: #fff;
+  box-shadow: 0 0 16px #3b5998;
+  /* background-color: yellow; */
+  list-style: none;
+  display: inline-block;
+  margin: 7px;
+  border-radius: 2em;
+  overflow: hidden;
+}
+
+.main{
+  /* background-color:  #6944b2; */
+  /* background-image: url('assets\css\images\intro.svg'); */
+}
+
+img{
+  margin: auto;
+  height: 14em;
+  position: absolute;
+  opacity: 1;
+  top: 23%;
+  left: 10%;
+}

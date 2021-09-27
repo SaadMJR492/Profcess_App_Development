@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+<h1>LOGIN</h1>
+<form method="POST">
+
+  <div
+    class="container"
+    style="
+    background-color:lightblue;
+    border: 2px solid black;
+    color: rgb(56, 56, 56);
+    font-style: inherit;
+    padding: 10px;
+  ">
+  <h1 class="font-weight-bolder" >Login</h1>
+  <div style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+    {% csrf_token %} {{form.as_p}}
+  </div>
+
+    <button  style=" padding: 10px;" class="btn btn-primary btn-outline-info">
+      Login
+    </button>
+
+    <p style="font-size:medium ;font-weight: bold; padding-top: 10px;">Don't have an account</p>
+
+  <a style="
+  font-style: oblique;
+  font-size: smaller;
+  color:darkred;
+  font-weight: bold;" href="{% url 'register_url' %}">signup</a>
+<br>
+<a style="font-style: oblique; font-size: smaller; color:darkred; font-weight: bold;" href="{% url 'password_reset' %}">Forgot Password?</a>
+  </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,198 @@
+{% extends "dashboard.html" %} {% block content %}
+<br><br>
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
+<style>
+    td{padding:20px; }
+    .card-body {
+                margin:10px, 10px;
+                padding:4px;
+                width: max-width ;
+                height: auto;
+                text-align:justify;
+
+            }
+    .right {
+  margin-right:0px;
+  margin-left: 400px;
+}
+.modal-confirm {
+	color: #636363;
+	width: 400px;
+	position: absolute;
+    left: 40%;
+    top: 40%;
+
+
+}
+.modal-confirm .modal-content {
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 0px;
+	border-radius: 25px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;
+	position: relative;
+
+}
+.modal-confirm h5 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}
+
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #000;
+	border-radius: 4px;
+	background: #ffffff;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #ffffff;
+	border-radius: 15px;
+	height:40px;
+	width: 20px;
+	text-align: center;
+	line-height: 20px;
+	border: 0.5px solid black;
+	font-weight: bold;
+	margin : 20px;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+	color: #fff;
+	border-radius: 15px;
+	height:40px;
+	width: 40px;
+	text-align: center;
+	line-height: 20px;
+	border: 0.5px solid black;
+	font-weight: bold;
+	margin : 20px;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+</style>
+<div >
+  <center><h1 style="color: #246ebd; padding=5px; font-size:40px">MY JOB LISTING</h1></center>
+</div>
+    <div>
+        <div>
+            <div>
+                <div >
+
+                    <div class="card-body">
+                        <div class="scroll">
+                      <!--  <div class="alert alert-primary" role="alert">
+                            You have posted {{ count }} jobs!
+                        </div> -->
+                        {% if jobs %}
+                            <div >
+                                <br>
+                                {% for job in jobs %}
+                                <div style="width: 92%;
+  margin-left:80px;border-style: solid; border-color: rgba(0, 0, 0, 0.699); border-width: 2px; border-radius: 20px;">
+                                    <table style="width:100%">
+                                        <tr>
+                                        <td style="width:9%;">
+                                            <i class='fas fa-city' style="font-size:48px;color:white; border-style: double; background-color: #003399; padding:30px; border-radius: 150px;"></i>
+                                        </td>
+                                    <div>
+                                        <td style="width:20%; text-align:left;">
+                                            <p style="font-size: 30px; font-color: rgba(54, 55, 56, 0.637); font-weight: 700;"><strong><a href="{% url 'recruiter:job_detail' pk=job.pk  %}">{{ job.job_title }}</a></strong></p>
+                                            <p style="font-size: 25px; font-color: rgba(54, 55, 56);font-weight: 400;"><a href="{% url 'recruiter:job_detail' pk=job.pk  %}">{{ user.company_name }}</a></p>
+                                        <p style="font-weight:bold;">{{ job.types_of_job }}</p>
+                                        </td>
+                                    </div>
+                                    <div>
+                                        <td style="text-align:left;width:20%">
+                                            <br>
+                                      <p style="font-size:13px; font-weight:bold;'">{{ job.minimum }} - {{ job.maximum }}LPA</p>
+                                        <p style="font-size:13px; font-weight:bold;">Experience - {{ job.exp_req }}</p>
+                                        <p style="font-size:13px; font-weight:bold;">Duration - {{ job.job_duration }}</p>
+                                      </td>
+                                    </div>
+                                    <div>
+                                        <td style="width:20%">
+                                            <br><br>
+                                        <p style="font-size:13px; font-weight:bold;color:red; text-align:center;">Apply By - {{ job.start_date }}</p>
+                                        <p style="font-size:13px; font-weight:bold;text-align:center;">Location - {{ job.city }},{{ job.state }}</p>
+                                        </td>
+                                    </div>
+                                    <div class="right">
+                                    <td align="right">
+                                    <table style="width:100px;">
+                                    <tr><td><a class="btn btn-primary" style="border-radius: 30px;height:50px; width: 150px; text-align: center; line-height: 30px;" href=#>View Applicant</a></td>
+                                     <td><a class="btn btn-primary" style="border-radius: 30px;height:50px; width: 150px; text-align: center; line-height: 30px;" href="{% url 'college:update_job' pk=job.pk %}">Edit Job</a> </td>
+                                      </tr>
+                                       <tr>
+                                        <td><a class="btn btn-warning" style="border-radius: 30px;height:50px; width: 150px; text-align: center; line-height: 30px;" href="{% url 'college:job_detail' pk=job.pk %}">Description</a></td>
+                                           <td><button type ="button" data-target="#myModal{{ job.pk }}" data-toggle="modal" class="btn btn-warning" style=" border-radius: 30px; height:50px; width: 150px; text-align: center; line-height: 30px;">Remove</button></td>
+                                     </tr>
+                                     </table>
+                                    </td></div>
+                                    </tr>
+
+                                    </table>
+                                </div>
+                                <br>
+
+                            </div><!-- Modal HTML -->
+                         {% endfor %} {% else %}
+                            <p>You haven't posted any jobs</p>
+                        {% endif %}
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br><br>
+{% for job in jobs %}
+<div id="myModal{{ job.pk }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+                <h4 class="modal-title w-100"><b>Do You Want To Delete This Job?</b></h4>
+               </div><br><br>
+			<div class="modal-footer justify-content-center">
+                <form method="POST" action="{% url 'college:delete_job' pk=job.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">Yes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock content %}

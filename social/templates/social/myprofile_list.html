@@ -1,0 +1,49 @@
+{% extends 'base1.html' %} {% block content %}
+<div class="p-5">
+    <h1 class="myhead2">Profiles</h1>
+    <hr />
+    <form class="form-inline">
+        <input class="form-control mr-3" placeholder="Search" value="{{ request.GET.si }}" type="text" name="si" />
+        <input class="btn btn-dark mr-3" type="submit" value="Search" />
+    </form>
+
+    <table class="table my-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for n1 in myprofile_list %}
+        <tr>
+            <td>{{n1.user_id.first_name}} {{n1.user_id.last_name}}</td>
+            <td>{{n1.age}}</td>
+            <td>{{n1.gender}}</td>
+            <td>
+                <a class="btn btn-dark btn-sm" href="/social/myprofile/users/{{n1.pk}}">Read More</a>
+                {% if n1.followed %}
+                    <a class="btn btn-danger btn-sm" href="/social/myprofile/unfollow/{{n1.pk}}">Unfollow</a>
+                {% elif n1.request_sent %}
+                    <a class="btn btn-secondary btn-sm" href="">Request Sent</a>
+                {% elif n1.followback %}
+                <a class="btn btn-primary btn-sm" href="/social/myprofile/send_friend_request/{{n1.id}}">Follow Back</a>
+
+                {% else %}
+                <!-- radzz -->
+                    <a class="btn btn-primary btn-sm" href="/social/myprofile/send_friend_request/{{n1.id}}">Follow</a>
+
+                {% endif %}
+                {% if n1.request_received %}
+                    <a class="btn btn-success btn-sm" href="/social/myprofile/accept_friend_request/{{n1.id}}">Accept Request</a>
+                {% elif n1.myfollower %}
+                        <a class="btn btn-secondary btn-sm" href="">Following You</a>
+                {% endif %}
+                <!-- radzz code ends -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

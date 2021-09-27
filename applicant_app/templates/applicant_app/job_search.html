@@ -1,0 +1,722 @@
+{% extends "dashboard.html" %}
+{% block content %}
+{% load static %}
+<style type="text/css">
+    .topNavCol {
+        border-radius: 60px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        height: 72.8px;
+    }
+
+    .candidate-nav1 {
+        border-top-left-radius: 60px;
+        border-bottom-left-radius: 60px;
+        height: 72.8px;
+        width: 260px;
+        text-align: center;
+    }
+
+    .candidate-nav2 {
+        height: 72.8px;
+        width: 260px;
+        text-align: center;
+    }
+
+    .candidate-nav3 {
+        border-top-right-radius: 60px;
+        border-bottom-right-radius: 60px;
+        height: 72.8px;
+        width: 260px;
+        text-align: center;
+    }
+
+    .candidateDetail {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        margin-left: 40px;
+        margin-right: 40px;
+        width: 100%;
+        border-radius: 25px;
+        height: 500px;
+        overflow-y: scroll;
+    }
+
+    .textChange {
+        text-transform: capitalize;
+    }
+
+    .roundSideRight {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .roundSideLeft {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    #breadth {
+        width: 150px;
+    }
+
+    @media screen and (min-width: 786px) {
+        #breadth {
+            width: 200px;
+        }
+    }
+
+    @media screen and (min-width: 1100px) {
+        #breadth {
+            width: 260px;
+        }
+    }
+
+    .apply-border {
+        border-right: 1px solid black;
+        text-align: center;
+    }
+
+    .activated {
+        background-color: #0275d8;
+        color: white;
+    }
+
+    .modal-confirm {
+        color: #636363;
+        width: 400px;
+        position: absolute;
+        left: 40%;
+        top: 30%;
+
+
+    }
+
+    .modal-confirm .modal-content {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        font-size: 0px;
+        border-radius: 25px;
+    }
+
+    .modal-confirm .modal-header {
+        border-bottom: none;
+        position: relative;
+
+    }
+
+    .modal-confirm h5 {
+        text-align: center;
+        font-size: 22px;
+        margin: 30px 0 -10px;
+    }
+
+    .modal-confirm .modal-body {
+        color: #999;
+    }
+
+    .modal-confirm .modal-footer {
+        border: none;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 10px 15px 25px;
+    }
+
+    .modal-confirm .modal-footer a {
+        color: #999;
+    }
+
+    .modal-confirm .btn,
+    .modal-confirm .btn:active {
+        color: #000;
+        border-radius: 4px;
+        background: #ffffff;
+        text-decoration: none;
+        transition: all 0.4s;
+        line-height: normal;
+        min-width: 120px;
+        border: none;
+        min-height: 40px;
+        margin: 0 5px;
+    }
+
+
+    .modal-confirm .btn-danger {
+        background: #f15e5e;
+        color: #fff;
+        border-radius: 20px;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 20px;
+        border: 0.5px solid black;
+        font-weight: bold;
+        margin: 20px;
+    }
+
+    .modal-confirm .btn-danger:hover,
+    .modal-confirm .btn-danger:focus {
+        background: #ee3535;
+    }
+
+    .next {
+        align: center;
+        border-radius: 50%;
+        border: 1px solid black;
+        margin-left: 80%;
+        display: inline-block;
+        padding: 8px 16px;
+    }
+
+    .candidateDetail {
+
+        transition: 0.3s;
+        margin-left: 40px;
+        margin-right: 40px;
+        width: 100%;
+        border-radius: 25px;
+        overflow-y: visible;
+    }
+
+    .textChange {
+        text-transform: capitalize;
+    }
+
+    .apply-border {
+        border-right: 1px solid black;
+        text-align: center;
+    }
+
+    .activated {
+        background-color: #0275d8;
+        color: white;
+    }
+
+    .float-child1 {
+        width: 45%;
+        float: left;
+        margin-left: 5%;
+        border: 1px solid black;
+        border-radius: 25px;
+
+
+    }
+
+    .float-child2 {
+        width: 45%;
+        float: right;
+        margin-right: 3%;
+        border: 1px solid black;
+        border-radius: 25px;
+
+    }
+
+    .t1 {
+        background-color: #164fab;
+        border-radius: 25px;
+        text-align: center;
+        color: white;
+        font-weight: medium;
+        height: 50px;
+        line-height: 50px;
+        font-size: 20px;
+
+    }
+
+    .vertical-line {
+        display: inline-block;
+        border-left: 1px solid black;
+        height: 100px;
+    }
+
+    .btn-complete-profile {
+        background-color: #0275D8;
+        color: white;
+        border: 1px blue solid;
+        padding: 10px;
+    }
+</style>
+<div class="container" style="align:center">
+    <div id="searchForm" class="col-md-10 col-10 align-items-center">
+        <h1 class="my-5 text-center">Are you looking for a Jobs?</h1>
+        <!--<ul class="row nav navbar navbar-expand-lg navbar-light bg-white justify-content-between topNavCol my-5 p-0"
+            id="searchTab" role="tablist">
+            <li class="nav-item col-sm-4 candidate-nav1 apply-border activated">
+                <a class="nav-link pt-4" href="{% url 'applicant:jobs_list' %}">All Jobs</a>
+            </li>
+            <li class="nav-item col-sm-4 candidate-nav2 apply-border">
+                <a class="nav-link pt-4" href="{% url 'applicant:job_searchfreshers' %}">Fresher Jobs</a>
+            </li>
+            <li class="nav-item col-sm-4 candidate-nav3">
+                <a class="nav-link pt-4" href="{% url 'applicant:job_searchwfh' %}">Work from Home Jobs</a>
+            </li>
+        </ul>-->
+        <div class="tab-content" id="searchTabContent">
+            <div class="tab-pane fade show active" id="job" role="tabpanel" aria-labelledby="job-tab">
+                <form class="form-inline pl-4" id="jobSearchForm" method="get">
+                    <div id="breadth">
+                        <label class="" for="jobs"></label>
+                        <input type="text" class="form-control bg-light flex-fill roundSideLeft" id="candidate breadth"
+                            name="q" placeholder="&#xf002;"
+                            style="font-family: 'Font Awesome 5 Free'; font-weight: 900;">
+                    </div>
+                    <div class="border-left border-dark" id="breadth">
+                        <label class="" for="jobs"></label>
+                        <!--<input type="text" >-->
+                        <select class="form-control bg-light flex-fill fa" id="candidate2 breadth" name="l"
+                            style="font-family: 'Font Awesome 5 Free'; font-weight: 900;">
+                            <option disabled selected hidden>&#xf3c5; location</option>
+                            <option value="Agra">Agra</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Ajmer">Ajmer</option>
+                                <option value="Aligarh">Aligarh</option>
+                                <option value="Allahabad">Allahabad</option>
+                                <option value="Ambala">Ambala</option>
+                                <option value="Amritsar">Amritsar</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Bareilly">Bareilly</option>
+                                <option value="Bharatpur">Bharatpur</option>
+                                <option value="Bhilwara">Bhilwara</option>
+                                <option value="Bhojpur">Bhojpur</option>
+                                <option value="Bhopal">Bhopal</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Chhatarpur">Chhatarpur</option>
+                                <option value="Chitrakoot">Chitrakoot</option>
+                                <option value="Churu">Churu</option>
+                                <option value="Coimbatore">Coimbatore</option>
+                                <option value="Daman">Daman</option>
+                                <option value="Darbhanga">Darbhanga</option>
+                                <option value="Darjeeling">Darjeeling</option>
+                                <option value="Dehradun">Dehradun</option>
+                                <option value="Dholpur">Dholpur</option>
+                                <option value="Diu">Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Faridabad">Faridabad</option>
+                                <option value="Fatehabad">Fatehabad</option>
+                                <option value="Fatehpur">Fatehpur</option>
+                                <option value="Firozabad">Firozabad</option>
+                                <option value="Gandhinagar">Gandhinagar</option>
+                                <option value="Ganganagar">Ganganagar</option>
+                                <option value="Garhwa">Garhwa</option>
+                                <option value="Gaya">Gaya</option>
+                                <option value="Gautam Buddh Nagar">Gautam Buddh Nagar</option>
+                                <option value="Ghaziabad">Ghaziabad</option>
+                                <option value="Ghazipur">Ghazipur</option>
+                                <option value="Gurgaon">Gurgaon</option>
+                                <option value="Gwalior">Gwalior</option>
+                                <option value="Hamirpur">Hamirpur</option>
+                                <option value="Haridwar">Haridwar</option>
+                                <option value="Hissar">Hissar</option>
+                                <option value="Hooghly">Hooghly</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Jaipur">Jaipur</option>
+                                <option value="Jaisalmer">Jaisalmer</option>
+                                <option value="Jalandhar">Jalandhar</option>
+                                <option value="Jammu">Jammu</option>
+                                <option value="Jhansi">Jhansi</option>
+                                <option value="Jodhpur">Jodhpur</option>
+                                <option value="Kanchipuram">Kanchipuram</option>
+                                <option value="Kanpur">Kanpur</option>
+                                <option value="Kanyakumari">Kanyakumari</option>
+                                <option value="Kargil">Kargil</option>
+                                <option value="Kohima">Kohima</option>
+                                <option value="Kolhapur">Kolhapur</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Kota">Kota</option>
+                                <option value="Kottayam">Kottayam</option>
+                                <option value="Kozhikode">Kozhikode</option>
+                                <option value="Kurnool">Kurnool</option>
+                                <option value="Kurukshetra">Kurukshetra</option>
+                                <option value="Kutch">Kutch</option>
+                                <option value="Lalitpur">Lalitpur</option>
+                                <option value="Leh">Leh</option>
+                                <option value="Lucknow">Lucknow</option>
+                                <option value="Ludhiana">Ludhiana</option>
+                                <option value="Madurai">Madurai</option>
+                                <option value="Mainpuri">Mainpuri</option>
+                                <option value="Mathura">Mathura</option>
+                                <option value="Meerut">Meerut</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Muzaffarnagar">Muzaffarnagar</option>
+                                <option value="Mysore">Mysore</option>
+                                <option value="Nagpur">Nagpur</option>
+                                <option value="Nainital">Nainital</option>
+                                <option value="Nashik">Nashik</option>
+                                <option value="Nanital">Nanital</option>
+                                <option value="Pali">Pali</option>
+                                <option value="Panipat">Panipat</option>
+                                <option value="Patna">Patna</option>
+                                <option value="Pithoragarh">Pithoragarh</option>
+                                <option value="Pondicherry">Pondicherry</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Raigarh">Raigarh</option>
+                                <option value="Raipur">Raipur</option>
+                                <option value="Rajkot">Rajkot</option>
+                                <option value="Ramgarh">Ramgarh</option>
+                                <option value="Ranchi">Ranchi</option>
+                                <option value="Rohta">Rohta</option>
+                                <option value="Sambalpur">Sambalpur</option>
+                                <option value="Shimla">Shimla</option>
+                                <option value="Sikar">Sikar</option>
+                                <option value="Solapur">Solapur</option>
+                                <option value="Sonipat">Sonipat</option>
+                                <option value="Srinagar">Srinagar</option>
+                                <option value="Surat">Surat</option>
+                                <option value="Thane">Thane</option>
+                                <option value="Thrissur">Thrissur</option>
+                                <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                <option value="Tonk">Tonk</option>
+                                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                <option value="Udaipur">Udaipur</option>
+                                <option value="Udupi">Udupi</option>
+                                <option value="Ujjain">Ujjain</option>
+                                <option value="Uttarkashi">Uttarkashi</option>
+                                <option value="Vadodara">Vadodara</option>
+                                <option value="Varanasi">Varanasi</option>
+                                <option value="Vellore">Vellore</option>
+                                <option value="Visakhapatnam">Visakhapatnam</option>
+
+
+                        </select>
+                    </div>
+                    <div class="border-left border-dark" id="breadth">
+                        <label class="" for="jobs"></label>
+                        <select class="form-control bg-light flex-fill" id="candidate3 breadth" name="e"
+                            style="font-family: 'Font Awesome 5 Free'; font-weight: 900;">
+                            <option disabled selected hidden>&#xf518; education</option>
+                            <option value="MBA">MBA</option>
+                            <option value="BCA">BCA</option>
+                            <option value="B.Tech">B.Tech</option>
+                            <option value="MA">MA</option>
+                            <option value="M.Sc.">M.Sc.</option>
+                            <option value="Journalism and Mass Communication">Journalism and Mass Communication</option>
+                            <option value="B.Sc.">B.Sc.</option>
+                            <option value="BA">BA</option>
+                            <option value="B.Comm">B.Comm</option>
+                            <option value="BBA">BBA</option>
+                            <option value="BA LLB">BA LLB</option>
+                            <option value="B.Arch">B.Arch</option>
+                            <option value="B.Des">B.Des</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="" for="searchBtn"></label>
+                        <button type="submit" class="btn btn-warning flex-fill roundSideRight">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+{% if m %}
+        <div class="card-body bg-transparent border-primary mt-1 ">
+            <ul class="list-group">
+                {% for c in m %}
+                <div class="container-fluid mt-4"  >
+                    <div  style="border: 2px solid #0275d8;
+              border-bottom: 20px solid #0275d8;
+ 			border-radius: 20px;
+
+            ">
+                        <div class="card-body " >
+                            <div class="row">
+                                <div class="col">
+
+                                    <a href="{% url 'applicant:job_detail' pk=c.pk %}">
+                                            <h1 class="list-group-item text-dark textChange">{{ c.job_title  }} </h1>
+                                    </a>
+
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">{{ c.posted_by }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">Company-{{ c.company_name }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">No. of Openings-{{ c.job_vacancies }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">Primary Profile-{{ c.primary_profile }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">Type of Job-{{ c.type_of_job }}</h3>
+                                </div>
+                                </div>
+                            <div class="col">
+
+                                    <div class="float-right">
+                                        <ul style="list-style-type:none;">
+                                            {% if request.user in c.applied_by.all %}
+                                     <li><a href="{% url 'applicant:applytojob' pk=c.pk %}" class="d-flex flex-column align-items-center">
+                                        <button type="button" class="btn btn-danger mb-3 rounded-pill">Already applied to this job</button>
+                                     </a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'applicant:applytojob' pk=c.pk %}" class="d-flex flex-column align-items-center">
+                                        <button type="button" class="btn btn-danger mb-3 rounded-pill">Apply Now</button>
+                                    </a></li>
+                                    {% endif %}
+
+                                    <li><a href="{% url 'applicant:job_detail' pk=c.pk %}">
+                                        <button type="button" class="btn btn-primary mb-3 rounded-pill">Get Details</button>
+                                    </a></li>
+                                            <li><a href="{% url 'applicant:shortlist_job'  %}" class="d-flex flex-column align-items-center">
+                                        <button type="button" class="btn btn-primary mb-3 "><span>&#9734;</span>Save</button>
+                                    </a></li>
+                                            <li><div style="height: 30px;width: 100px;background-color: #E0E0E0;color:black;text-align: center;"><small>Recruiter job</small></div></li>
+                                        </ul>
+
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </ul>
+        </div>
+{% else %}
+<div class="card-body">
+    <div class="alert alert-primary" role="alert">
+        Recruiter will soon be posting amazing jobs for you!!
+    </div>
+</div>
+{% endif %}
+
+{% if clgjobs %}
+        <div class="card-body bg-transparent border-primary mt-1 ">
+            <ul class="list-group">
+                {% for c in  clgjobs%}
+                <div class="container-fluid mt-4"  >
+                    <div  style="border: 2px solid #0275d8;
+              border-bottom: 20px solid #0275d8;
+ 			border-radius: 20px;
+
+            ">
+                        <div class="card-body " >
+                            <div class="row">
+                                <div class="col">
+
+                                    <a href="{% url 'applicant:job_detail' pk=c.pk %}">
+                                            <h1 class="list-group-item text-dark textChange">{{ c.job_title  }} </h1>
+                                    </a>
+
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">{{ c.posted_by }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">Company-{{ c.company_name }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">No. of Openings-{{ c.job_vacancies }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">Primary Profile-{{ c.primary_profile }}</h3>
+                                </div>
+                                <div class="row  ml-2 align-items-start">
+                                    <h3 class="getVal text-info">Type of Job-{{ c.type_of_job }}</h3>
+                                </div>
+                                </div>
+                            <div class="col">
+
+                                    <div class="float-right">
+                                        <ul style="list-style-type:none;">
+                                            {% if request.user in c.applied_by.all %}
+                                     <li><a href="{% url 'applicant:applytojob' pk=c.pk %}" class="d-flex flex-column align-items-center">
+                                        <button type="button" class="btn btn-danger mb-3 rounded-pill">Already applied to this job</button>
+                                     </a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'applicant:applytojob' pk=c.pk %}" class="d-flex flex-column align-items-center">
+                                        <button type="button" class="btn btn-danger mb-3 rounded-pill">Apply Now</button>
+                                    </a></li>
+                                    {% endif %}
+
+                                    <li><a href="{% url 'applicant:job_detail' pk=c.pk %}">
+                                        <button type="button" class="btn btn-primary mb-3 rounded-pill">Get Details</button>
+                                    </a></li>
+                                             <li><a href="{% url 'applicant:shortlist_job'  %}" class="d-flex flex-column align-items-center">
+                                        <button type="button" class="btn btn-primary mb-3 rounded-pill"><span>&#9734;</span> Save</button>
+                                    </a></li>
+                                            <li><div style="height: 30px;width: 100px;background-color: #E0E0E0;color:black;text-align: center;"><small>On-campus job</small></div></li>
+
+                                        </ul>
+
+
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </ul>
+        </div>
+
+{% endif %}
+
+
+
+
+<!--<div class="float-child1">
+    <div class="t1">Recruiter Jobs</div>
+    {% if m %}
+    <ul class="list-group list-group-flush">
+        {% for c in m %}
+        <a href="{% url 'applicant:job_detail' pk=c.pk %}">
+            <h1 class="list-group-item text-dark textChange">{{ c.job_title  }} </h1>
+        </a>
+        <div class="media-body">
+            <div class="row  ml-2 align-items-start">
+                <h3 class="getVal text-info">{{ c.posted_by }}</h3>
+            </div>
+            <div class="row  ml-2 align-items-start">
+                <h3 class="getVal text-info">Company-{{ c.company_name }}</h3>
+            </div>
+            <div class="row  ml-2 align-items-start">
+                <h3 class="getVal text-info">No. of Openings-{{ c.job_vacancies }}</h3>
+            </div>
+            <div class="row  ml-2 align-items-start">
+                <h3 class="getVal text-info">Primary Profile-{{ c.primary_profile }}</h3>
+            </div>
+            <div class="row  ml-2 align-items-start">
+                <h3 class="getVal text-info">Type of Job-{{ c.type_of_job }}</h3>
+            </div>
+
+
+
+
+            <h3>Skills</h3>
+                            <h5 class="getVal">{{ c.skill_info }}</h5>
+
+
+                            <h3>Experience</h3>
+                            <h5 class="getVal">{{c.experience_title}}</h5>
+                            <br>
+
+
+                            <h3>Education</h3>
+                            <h5 class="getVal">{{c.school_degree}}</h5>
+                            <br>-->
+
+            <!--<div class="col-sm-10 my-10">
+                {% if request.user in c.applied_by.all %}
+                <a href="{% url 'applicant:applytojob' pk=c.pk %}" class="d-flex flex-column align-items-center">
+                    <button type="button" class="btn btn-danger mb-3 rounded-pill">Already applied to this job</button>
+                </a>
+                {% else %}
+                <a href="{% url 'applicant:applytojob' pk=c.pk %}" class="d-flex flex-column align-items-center">
+                    <button type="button" class="btn btn-danger mb-3 rounded-pill">Apply Now</button>
+                </a>
+                {% endif %}
+                <a href="{% url 'applicant:shortlist_job'  %}" class="d-flex flex-column align-items-center">
+                    <button type="button" class="btn btn-primary mb-3 rounded-pill">Save</button>
+                </a>
+                <a href="{% url 'applicant:job_detail' pk=c.pk %}">
+                    <button type="button" class="btn btn-primary mb-3 rounded-pill">Get Details</button>
+                </a>
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <div class="card-body">
+                <div class="alert alert-primary" role="alert">
+                    Recruiter will soon be posting amazing jobs for you!!
+                </div>
+            </div>
+            {% endif %}
+    </ul>
+</div>
+</div>
+<div class="float-child2">
+    <div class="t1">On campus jobs</div>
+    {% if clgjobs %}
+    {% for c in clgjobs %}
+    <a href="{% url 'college:job_detail' pk=c.pk %}">
+        <h1 class="list-group-item text-dark textChange">{{ c.job_title  }} <span class="dotc"></span> </h1>
+    </a>
+    {% endfor %}
+    {% else %}
+    <div class="card-body">
+        <div class="alert alert-primary" role="alert">
+            Ask your TPO to connect with at contact@profcess.com us and post job opportunities for you!!
+        </div>
+    </div>
+    {% endif %}
+</div>
+<br><br>
+<a type="button" data-target="#myModal" data-toggle="modal" class="next"> > </a>
+<br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> -->
+<div style="height: 50px;width: 100px;background-color: blue;color:white;text-align: center; margin-right:0px;float: right;"><a type="button" data-target="#myModal" data-toggle="modal" >More Jobs...</a></div>
+<br><br><br><br>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column">
+                <h4 class="modal-title w-100"><b>Please connect at <a
+                            href="mailto:contact@profcess.com">contact@profcess.com </a>for seeing all job
+                        opportunities</b></h4>
+            </div><br><br>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<a id="link-profile-complete" style="color:white; display:none;" type="button" data-target="#myModal2"
+    data-toggle="modal" class='btn-complete-profile next'>
+    Complete
+    Profile </a>
+<br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br>
+<div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column">
+                <h4 class="modal-title w-100"><b>Please fill all the details in your profile<br><a
+                            href="{% url 'applicant:edit_profile' pk=request.user.pk %}">click here!</a></b></h4>
+            </div><br><br>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">OK </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    var tag = document.getElementsByClassName("getVal");
+    for (let i = 0; i < tag.length; i++) {
+        let inText = tag[i].innerText;
+        inText = inText.replace("[", "");
+        inText = inText.replace("]", "");
+        inText = inText.replaceAll("\"", "");
+        tag[i].innerText = inText;
+    }
+    var space = document.getElementsByClassName("form-control");
+    for (let i = 0; i < space.length; i++) {
+        space[i].style.width = "260px";
+    }
+    var navItem = document.getElementsByClassName("nav-item");
+    for (var i = 0; i < navItem.length; i++) {
+        navItem[i].addEventListener("click", function () {
+            var current = document.getElementsByClassName("activated");
+            current[0].className = current[0].className.replace("activated", "");
+            this.className += " activated";
+        });
+    }
+
+       window.onload = function () {
+            if (document.getElementById('link-profile-complete') != null || document.getElementById('link-profile-complete') != "") {
+                document.getElementById('link-profile-complete').click();
+            }
+        }
+</script>
+{% endblock %}

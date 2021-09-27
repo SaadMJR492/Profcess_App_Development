@@ -1,0 +1,4 @@
+id,Username,email,Usertype,Password,Confirm Pass,Skills
+10333,ibm,ibm@gmail.com,Applicant,newuser123,newuser123,ABC
+10444,azure,azure@gmail.com,Applicant,newuser124,newuser124,BBB
+1099999,hdddd,hddd@gmail.com,Applicant,newuser1,newuser1,HDDD

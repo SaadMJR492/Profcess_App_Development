@@ -1,0 +1,592 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block content %}
+<!-- Script -->
+<style>
+    .banner{
+         background-color: #3d7bd0;
+    }
+
+    .img-circle {
+        border-radius: 50%;
+        position: relative;
+        right: 70%;
+        border: 5px solid #0052c2;
+    }
+    .t1 {
+        position: relative;
+        right: 10%;
+    }
+    .card{
+        background-color: #e9e9e9;
+        width :100%;
+        height: auto;
+        margin-right: 80px;
+        margin-left: 80px;
+        border-radius: 20px;
+
+     }
+     .card1{
+        background-color: #e9e9e9;
+        width :100%;
+        height: auto;
+        margin-right: 80px;
+        margin-left: 80px;
+        border-radius: 20px;
+
+     }
+     .highlight{
+     background-color: #0052c2;
+     width: 135px;
+     padding-top: 5px;
+     padding-right: 5px;
+     padding-bottom: 5px;
+     margin-left: -25px;
+     text-align:center;
+     border-radius:0px 12px 12px 0px;
+  }
+    .highlight1{
+     background-color: #0052c2;
+     width: 3%;
+     padding-right: 5px;
+     margin-left: -10px;
+     text-align:center;
+     height: 40px;
+     border-radius:0px 4px 4px 0px;
+  }
+    .highlight2{
+     background-color: #0052c2;
+     width: 250px;
+     text-align:center;
+     height: 40px;
+     border-radius:10px;
+
+  }
+
+
+
+</style>
+<!-- CSS-->
+
+<div >
+  <center><h1 style="color: #0052c2; font-family: Arial, Helvetica, sans-serif; padding=5px; font-size:40px">Candidate Details</h1></center>
+</div>
+<br>
+
+<div class="banner">
+    <br>
+<!-- Banner Section-->
+<!--     <div class="col-xl-3 col-md-6 col-12">-->
+         <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+
+                                    {% if request.user.applicantuserprofile.profile_pic.url == "" %}
+                                        <a href="{% url 'applicant:upload_pic' pk=user.pk %}">
+                                            <img class="img-circle"
+                                                 src="{% static 'dashboard/img/theme/person.png' %}"
+                                                 height="250"
+                                                 width="100%"
+                                                 class="img-thumbnail"
+                                                 alt="profile"
+                                            />
+                                            <img src="{{ url }}" alt="" />
+                                       </a>
+                                    {% else %}
+                                       <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+                                            <img class="img-circle"
+                                                 src="{{ request.user.applicantuserprofile.profile_pic.url }}"
+                                                 height="250"
+                                                 width="100%"
+                                                 class="img-thumbnail"
+                                                 alt="profile"
+                                            />
+                                            <img src="{{ url }}" alt="" />
+                                       </a>
+                                    {% endif %}
+                </div>
+
+
+                 <div class="col-md-9">
+                     <br><br>
+                     <div class="t1">
+                            <h1 style="font-size: 300%;color:white;font-weight:bold;">{{applicantuserprofile.user.first_name}} {{applicantuserprofile.user.last_name}}</h1>
+                            <h2 style="font-size: 180%;color:white;font-weight:500;">{{applicantuserprofile.description}}</h2>
+                            <p style="font-size: 100%;color:#bfcddf;font-weight:400;">I am a talented, ambitious and hardworking individual, with broad skills and experience in app development, and data analysis.</p> <!-- This is a dummy variable -->
+                     </div>
+                 </div>
+         </div> <br>
+     </div>
+</div>
+    <br><br>
+
+<!--Section 2-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" >
+                            <div class="card-body">
+                                <h3 style="color:white;font-weight:600;" class="card-title"><div class="highlight" > Contact</div></h3>
+                                <h5 style="font-size: 100%;font-weight:bold ">&ensp;&ensp;<i style="border-radius:10px;color:#275eb8;" class="fas fa-phone-square-alt fa-lg"></i> &nbsp;&ensp;{{user.phone}}</h5>
+                                <h5 style="font-size: 100%;font-weight:bold ">&ensp;&ensp;<i style="border-radius:10px;color:#275eb8;" class="fas fa-envelope-square fa-lg"></i> &ensp; {{applicantuserprofile.user.email}}</h5>
+                                <h5 style="font-size: 100%;font-weight:bold ">&ensp;&ensp;<i style="border-radius:10px;color:#275eb8;" class="fas fa-map-marker-alt fa-lg"></i>  &ensp;&nbsp;{{applicantuserprofile.location}}</h5>
+
+                                <br><h3 style="color:white;font-weight:600;" class="card-title"><div class="highlight"> Skill </div></h3>
+
+                                <h3 class="getVal"  id="Skill">{{applicantuserprofile.skill_info}}<br></h3>
+
+                                <br><h3 style="color:white;font-weight:600;" class="card-title"><div class="highlight"> Language </div></h3>
+                                <br><h3 style="color:white;font-weight:600;" class="card-title"><div class="highlight"> Software </div></h3>
+                                <br><h3 style="color:white;font-weight:600;" class="card-title"><div class="highlight"> Certification </div></h3>
+
+                                <br><br>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card" >
+                            <div class="card-body">
+                                <div class="row">
+                                <div class="highlight1 " ></div>
+                                <h2 style="font-size: 170%; color:black;font-weight:bold "class="card-title ">&ensp;Education</h2></div>
+
+                                <div class="highlight2">
+                                <p class="getVal"  style="font-size: 120%;color:white;font-weight:600" >{{applicantuserprofile.location_of_school }} - {{ applicantuserprofile.end_school }}</p>
+                                </div>
+                                  <p class="getVal" style="font-size: 120%; color:black;font-weight:bold" >{{ applicantuserprofile.school_name }}</p>
+
+                                  <p class="getVal"  style="font-size: 120%; color:black;font-weight:400" >{{ applicantuserprofile.start_school }}</p>
+
+                            </div>
+                        </div>
+
+                         <div class="card" >
+                            <div class="card-body">
+                                <div class="row">
+                                <div class="highlight1 " ></div>
+                                    <h2 style="font-size: 170%; color:black;font-weight:bold "class="card-title">&ensp;Work History</h2><br></div>
+
+                                    <h2 class="getVal"  style="font-size: 120%; color:black;font-weight:bold"  >{{applicantuserprofile.experience_title}}</h2>
+                                <div class="row">
+
+                                    <p class="getVal highlight2" style="font-size: 120%; color:white;font-weight:600"  >{{applicantuserprofile.start_company}} - {{applicantuserprofile.end_company}}</p>
+
+                                    <p class="getVal" style="font-size: 120%; color:#8b8b8b;font-weight:bold"  >&emsp;&nbsp;{{applicantuserprofile.company_name}} , {{applicantuserprofile.location}}</p>
+                                    </div>
+                                    <p class="getVal" style="font-size: 120%; color:black;font-weight:bold"  >{{applicantuserprofile.area_of_expertise}}</p>
+
+
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card1" >
+                                    <div class="card-body">
+                                        <h2 style="font-size: 125%; color:black;font-weight:bold "class="card-title">Accomplishments</h2>
+                                         <p class="getVal" style="font-size: 100%; color:black;font-weight:550" >{{applicantuserprofile.accomplishment_description }}</p>
+                                        <br><br><h2 style="font-size: 125%; color:black;font-weight:bold "class="card-title">Affiliation</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="card1" >
+                                    <div class="card-body">
+                                        <h2 style="font-size: 125%; color:black;font-weight:bold "class="card-title">Hobbies</h2>
+                                       <br><br><h2 style="font-size: 125%; color:black;font-weight:bold "class="card-title">Interest</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                            <div class="text-center col-md-12 mb-5">
+                                {% if request.user not in applicantuserprofile.shortlist_can.all %}
+                                <a href="{% url 'recruiter:can' pk=applicantuserprofile.pk %}"class="btn btn-primary rounded-pill">Shortlist</a>
+                                {% else %}
+                                <a href="{% url 'recruiter:can' pk=applicantuserprofile.pk %}"class="btn btn-primary rounded-pill">Shortlisted</a>
+                                {% endif %}
+                                </div>
+
+
+<!-- <div class="container-fluid mt--6">
+    <div class="row justify-content-center">
+        <div class="col-md-11 col-12">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    {% if request.user.applicantuserprofile.profile_pic.url == "" %}
+                                        <a href="{% url 'applicant:upload_pic' pk=user.pk %}">
+                                            <img
+                                                 src="{% static 'dashboard/img/theme/person.png' %}"
+                                                 height="700"
+                                                 width="80%"
+                                                 class="img-thumbnail"
+                                                 alt="profile"
+                                            />
+                                            <img src="{{ url }}" alt="" />
+                                       </a>
+                                    {% else %}
+                                       <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+                                            <img
+                                                 src="{{ request.user.applicantuserprofile.profile_pic.url }}"
+                                                 height="700"
+                                                 width="80%"
+                                                 class="img-thumbnail"
+                                                 alt="profile"
+                                            />
+                                            <img src="{{ url }}" alt="" />
+                                       </a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div class="my-3">
+                                                <span>User Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{applicantuserprofile.user.username}} </span>
+                                                <hr>
+                                            </div>
+                                            <div>
+                                                <span class="text-primary pr-5">Profession</span>
+                                                <span id="briefDescription">{{applicantuserprofile.description}}</span>
+                                            </div>
+                                            <div class="mt-2">
+                                                <i class="fas fa-map-marker-alt"></i><span class="pl-2 pr-5">Location: </span>
+                                                <span id="Location">{{applicantuserprofile.location}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div class="my-3">
+                                                <span>EDUCATION </span>
+                                                <hr>
+                                                <h3 id="Education">{{ applicantuserprofile.school_degree }}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div class="my-3">
+                                                <span>CERTIFICATION </span>
+                                                <hr>
+                                                <h3 id="certification">{{applicantuserprofile.accomplishment_title }}</h3>
+                                            </div>
+                                            <div class="col" id="achievement"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div>
+                                                <span>SKILLS</span>
+                                                <hr>
+                                                <h3 id="Skill">{{applicantuserprofile.skill_info}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div>
+                                                <span>EXPERIENCE </span>
+                                                <hr>
+                                                <h3 id="Experience">{{applicantuserprofile.experience_title}}</h3>
+                                            </div>
+                                            <div id="iExp" class="col"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div>
+                                                <i class="fas fa-user"></i><span class="pl-2">ABOUT </span>
+                                                <hr>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-muted"><h6>BASIC INFORMATION</h6></span>
+                                            </div>
+                                            <table>
+                                                <tr>
+                                                    <td>First Name:</td>
+                                                    <td class="pl-2 " id="profileFirstName">{{applicantuserprofile.first_name}}</td>
+                                                    <input type="hidden" id="getFName" name="variable" value="{{applicantuserprofile.user.first_name}}">
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name:</td>
+                                                    <td class="pl-2" id="profileLastName">{{applicantuserprofile.last_name}}</td>
+                                                    <input type="hidden" id="getLName" name="variable" value="{{applicantuserprofile.user.last_name}}">
+                                                </tr>
+                                                <tr>
+                                                    <td>Birthday:</td>
+                                                    <td class="pl-2" id="profileDob">{{applicantuserprofile.dob}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender:</td>
+                                                    <td class="pl-2" id="profileGender">{{applicantuserprofile.gender}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% ifnotequal applicantuserprofile.profile_resume.name "blank_resume.docx" %}
+                                    <div class="col-xl-12 col-md-12 col-12">
+                                        <div class="row justify-content-left">
+                                            <div class="col-md-12 col-12">
+                                                <div>
+                                                    <hr>
+                                                    <h3>Resume in Document Form</h3>
+                                                    <h5><a href="{{ applicantuserprofile.profile_resume.url }}" target="_blank"><button class="btn btn-primary">Reject</button></a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endifnotequal %}
+                                <!--<div class="col-xl-3 col-md-6 col-12">
+                                    <div class="row justify-content-left">
+                                        <div class="col-md-12 col-12">
+                                            <div class="mb-5 mt-sm-0 mt-5">
+                                                <span>CONTACT <button id="button-style" type="button" class="button-style fas fa-edit" data-toggle="modal" data-target="#editContact" onclick="saveContact()"></button></span>
+                                                <hr>
+                                            </div>
+                                            <table>
+                                                <tr>
+                                                    <td>Phone: </td>
+                                                    <td class="pl-2" id="contactInfo">{{applicantuserprofile.contact_information}}</td>
+                                                    <input type="hidden" id="getPhone" name="variable" value="{{applicantuserprofile.user.phone}}">
+                                                </tr>
+                                                <tr>
+                                                    <td>E-Mail: </td>
+                                                    <td class="pl-2" id="mailId">{{applicantuserprofile.mailid}}</td>
+                                                    <input type="hidden" id="getMail" name="variable" value="{{applicantuserprofile.user.email}}">
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--DJANGO-->
+<!--<div class="row justify-content-center" hidden>
+    <div class="col-md-8 col-12">
+        <form method="POST">
+            <div class="card">
+                <!-- Card header -->
+               <!-- <div class="card-header">
+                    {% csrf_token %}
+                    <div class="text-center">
+                        <button id="finalSaveButton" type="submit">Save Updated Profile</button>
+                    </div>
+                </div>
+                <!-- Card body -->
+                <!--<div class="card-body">
+                    {% for field in form %}
+                    <div class="form-group row justify-content-center">
+                        <label for="example-text-input" class="col-md-3 col-4 col-form-label form-control-label">
+                            {{ field.label_tag }}{% if field.field.required %} * {% endif %}</label>
+                        <div class="col-md-9 col-8">
+                            {{ field }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>-->
+
+<!--AddCompanyDetails -->
+<!--<div id="addCompanyDetails" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Add a new Experience</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="cDesignation">Add designation</label>
+                            <input id="cDesignation" type="text" class="form-control" name="iExp[designation]"
+                                required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cName">Company name</label>
+                            <input id="cName" type="text" class="form-control" name="iExp[cName]" />
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="cCity">City</label>
+                                <input id="cCity" class="form-control" type="text" name="iExp[city]">
+                            </div>
+                            <div class="form-group col">
+                                <label for="cState">State</label>
+                                <input id="cState" class="form-control" type="text" name="iExp[state]">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="cFrom">From</label>
+                                <input id="cFrom" class="form-control" type="date" name="iExp[from]">
+                            </div>
+                            <div class="form-group col">
+                                <label for="cTill">Till</label>
+                                <input id="cTill" class="form-control" type="date" name="iExp[till]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!--AddSchoolInformation-->
+<!--<div id="addSchoolDetails" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Add Institute information</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sName">School</label>
+                            <input id="sName" type="text" class="form-control" name="studentEducation[name]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="sDegree">Degree</label>
+                            <input id="sDegree" type="text" class="form-control" name="studentEducation[degree]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="sField">Field of study</label>
+                            <input id="sField" type="text" class="form-control" name="studentEducation[field]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="sLocation">Location</label>
+                            <input id="sLocation" type="text" class="form-control" name="studentEducation[location]" />
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="sFrom">From</label>
+                                <input id="sFrom" class="form-control" type="date" name="studentEducation[from]">
+                            </div>
+                            <div class="form-group col">
+                                <label for="sTill">Till</label>
+                                <input id="sTill" class="form-control" type="date" name="studentEducation[till]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!--Achievements-->
+<!--<div id="addAchievementDetails" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Certificates</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="aTitle">Project Name</label>
+                            <input id="aTitle" type="text" class="form-control" name="achievement[title]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="aDescription">Description</label>
+                            <textarea id="aDescription" type="text" class="form-control"
+                                name="achievement[description]"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="aIssuer">Issuer</label>
+                                <input id="aIssuer" type="text" class="form-control" name="achievement[issuer]" />
+                            </div>
+                            <div class="form-group col">
+                                <label for="aIssue">Date</label>
+                                <input id="aIssue" class="form-control" type="date" name="achievement[issue]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>-->
+
+<br>
+<br>
+<br>
+{% endblock content %}
+
+{% block dashboardScripts %}
+<script type="text/javascript">
+    var tag=document.getElementsByClassName("getVal");
+    for(let i=0;i<tag.length;i++)
+    {
+        let inText=tag[i].innerText;
+        inText=inText.replaceAll("[","");
+        inText=inText.replaceAll("]","");
+        inText=inText.replaceAll("\"","");
+        tag[i].innerText=inText;
+    }
+    var space=document.getElementsByClassName("form-control");
+    for(let i=0;i<space.length;i++)
+    {
+        space[i].style.width="260px";
+    }
+    var navItem = document.getElementsByClassName("nav-item");
+    for (var i = 0; i < navItem.length; i++) {
+        navItem[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("activated");
+            current[0].className = current[0].className.replace("activated", "");
+            this.className += " activated";
+        });
+    }
+</script>
+{% endblock %}

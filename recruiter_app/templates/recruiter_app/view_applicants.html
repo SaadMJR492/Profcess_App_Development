@@ -1,0 +1,352 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .candidateDetail{
+
+        transition: 0.3s;
+        margin-left:40px;
+        margin-right:40px;
+        width: 100%;
+        border-radius: 25px;
+        overflow-y:visible;
+    }
+    td{padding:5px; }
+    .card-body {
+                margin:10px, 10px;
+                padding:4px;
+                width: max-width ;
+                height: auto;
+                text-align:justify;
+
+            }
+    .right {
+  margin-right:0px;
+  margin-left: 400px;
+}
+    .textChange{
+        text-transform: capitalize;
+    }
+    .apply-border{
+        border-right: 1px solid black;
+        text-align: center;
+    }
+    .activated{
+        background-color: #0275d8;
+        color:white;
+    }
+    .float-child1 {
+        width: 35%;
+        float: left;
+        margin-left:5%;
+
+    }
+    .float-child2 {
+        width: 35%;
+        float: right;
+        margin-right:5%;
+       }
+
+.modal-confirm {
+	color: #636363;
+	width: 400px;
+	position: absolute;
+    left: 40%;
+    top: 40%;
+
+
+}
+.modal-confirm .modal-content {
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 0px;
+	border-radius: 25px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;
+	position: relative;
+
+}
+.modal-confirm h5 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}
+
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #000;
+	border-radius: 4px;
+	background: #ffffff;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #ffffff;
+	border-radius: 15px;
+	height:40px;
+	width: 20px;
+	text-align: center;
+	line-height: 20px;
+	border: 0.5px solid black;
+	font-weight: bold;
+	margin : 20px;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+	color: #fff;
+	border-radius: 15px;
+	height:40px;
+	width: 40px;
+	text-align: center;
+	line-height: 20px;
+	border: 0.5px solid black;
+	font-weight: bold;
+	margin : 20px;
+}
+    .img-circle {
+        border-radius: 50%;
+        border: 3px solid #0052c2;
+    }
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.boxes{
+    border-bottom-width: 30px;
+    border-bottom-style: solid;
+    border-bottom-color: blue;
+    position:absolute;
+}
+
+ .t1{
+        background-color: #1460c7;
+        border-radius: 25px;
+        text-align: center;
+        color: white;
+        font-weight: medium;
+        height:50px;
+        line-height: 50px;
+        font-size: 20px;
+        width:50%;
+        margin-left:25%;
+
+    }
+.vertical {
+            border-left: 3px solid #1460c7;
+            position:absolute;
+            left: 50%;
+            height:300%;
+
+           }
+
+</style>
+<div ><br>
+  <center><h1 style="color: #246ebd; padding=5px; font-size:35px">My Job Listing</h1></center><br>
+</div>
+<div style="float:left;width:50%;overflow:auto;">
+<div class="t1">Applicant For Job</div>
+{% if applied_candidates %}
+<ul class="list-group">
+    {% for c in applied_candidates %}<br>
+    <div class="container-fluid mt-4">
+        <div style="background-color: white;box-shadow:5px; border : 2px solid #1460c7; border-width: medium medium 30px medium; border-radius: 20px;">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <br>&nbsp;
+                        {% if request.user.applicantuserprofile.profile_pic.url == "" %}
+                        <img class="img-circle" src="{% static 'dashboard/img/theme/person.png' %}" height="150px" width="150px" class="img-thumbnail" alt="profile"/>
+                        <img src="{{ url }}" alt="" />
+                        {% else %}
+                        <img class="img-circle" src="{{ request.user.applicantuserprofile.profile_pic.url }}" height="150px" width="150px" class="img-thumbnail" alt="profile"/>
+                        <img src="{{ url }}" alt="" />
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6" ><br><br>
+                        <h1 href="{% url 'recruiter:applicant_detail' pk=c.pk %}"style="color:black;">{{ c.first_name }}  {{ c.last_name }}</h1>
+                        <h3 class="getVal"> {{c.experience_title }}</h3>
+                        <h5 style="font-size:15px;"><i class="fa fa-map-marker" style="font-size:24px"></i>  {{c.location}}</h5>
+                    </div>
+                    <div class="col"><br><br>
+                        <a href="{% url 'recruiter:job_can' pk=c.pk mk=job.pk%}" class="d-flex flex-column align-items-center" onclick="myFunction()">
+                            <button type="button" class="btn btn-primary mb-3 rounded-pill"style="border-radius: 25px;height:45px; width: 120px; text-align: center; line-height: 25px;"> Shortlist  </button>
+                        </a>
+                        <a href="{% url 'recruiter:applicant_detail' pk=c.pk %}"class="d-flex flex-column align-items-center" >
+                            <button type="button" class="btn btn-warning mb-2 " style="color:white;border-radius:25px;height:45px; width: 120px; text-align: center; line-height: 25px;background-color:#f56c22;">Get Details</button>
+                        </a><br>
+                    </div>
+                </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 style="color:black;"><b>&emsp;&emsp;Education</b></h3>
+                </div>
+                <div class="col-md-9">
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{c.school_degree}} </h5>
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{c.school_name}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <br><h3 style="color:black;"><b>&emsp;&emsp;Skill</b></h3>
+                </div>
+                <div class="col-md-9"><br>
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{ c.skill_info }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <br><h3 style="color:black;"><b>&emsp;&emsp;Work History</b></h3>
+                </div>
+                <div class="col-md-9"><br>
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{ c.experience_title }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <br><h3 style="color:black;"><b>&emsp;&emsp;Language</b></h3>
+                </div>
+                <div class="col-md-9"><br>
+                    <h5 style="font-size:15px; color : #565e6a;" class="getVal"></h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+        {% endfor %}
+        </ul><br><br><br>
+        {% else %}
+        <br>
+        <div style="width:50%;margin-left:25%;" class="alert alert-primary" role="alert">
+            <center>No Applicants Found!</center>
+        </div>
+        {% endif %}
+    </div>
+
+        <div class="vertical"></div>
+
+
+<div style="float:right;width:50%;">
+<div class="t1">Best Matched Candidate </div>
+{% if applicants %}
+<ul class="list-group">
+    {% for c in applicants %}<br>
+    <div class="container-fluid mt-4">
+        <div style="background-color: white;box-shadow:5px; border : 2px solid #1460c7; border-width: medium medium 30px medium; border-radius: 20px;">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <br>&nbsp;
+                        {% if request.user.applicantuserprofile.profile_pic.url == "" %}
+                        <img class="img-circle" src="{% static 'dashboard/img/theme/person.png' %}" height="150px" width="150px" class="img-thumbnail" alt="profile"/>
+                        <img src="{{ url }}" alt="" />
+                        {% else %}
+                        <img class="img-circle" src="{{ request.user.applicantuserprofile.profile_pic.url }}" height="150px" width="150px" class="img-thumbnail" alt="profile"/>
+                        <img src="{{ url }}" alt="" />
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6" ><br><br>
+                        <h1 href="{% url 'recruiter:applicant_detail' pk=c.pk %}"style="color:black;">{{ c.first_name }}  {{ c.last_name }}</h1>
+                        <h3 class="getVal"> {{c.experience_title }}</h3>
+                        <h5 style="font-size:15px;"><i class="fa fa-map-marker" style="font-size:24px"></i>  {{c.location}}</h5>
+                    </div>
+                    <div class="col"><br><br>
+                        <a href="{% url 'recruiter:job_can' pk=c.pk mk=job.pk %}" class="d-flex flex-column align-items-center" onclick="myFunction()">
+                            <button type="button" class="btn btn-primary mb-3 rounded-pill"style="border-radius: 25px;height:45px; width: 120px; text-align: center; line-height: 25px;"> Shortlist  </button>
+                        </a>
+                        <a href="{% url 'recruiter:applicant_detail' pk=c.pk %}"class="d-flex flex-column align-items-center" >
+                            <button type="button" class="btn btn-warning mb-2 " style="color:white;border-radius:25px;height:45px; width: 120px; text-align: center; line-height: 25px;background-color:#f56c22;">Get Details</button>
+                        </a><br>
+                    </div>
+                </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 style="color:black;"><b>&emsp;&emsp;Education</b></h3>
+                </div>
+                <div class="col-md-9">
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{c.school_degree}} </h5>
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{c.school_name}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <br><h3 style="color:black;"><b>&emsp;&emsp;Skill</b></h3>
+                </div>
+                <div class="col-md-9"><br>
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{ c.skill_info }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <br><h3 style="color:black;"><b>&emsp;&emsp;Work History</b></h3>
+                </div>
+                <div class="col-md-9"><br>
+                    <h5 style="font-size:15px;color : #565e6a;" class="getVal">{{ c.experience_title }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <br><h3 style="color:black;"><b>&emsp;&emsp;Language</b></h3>
+                </div>
+                <div class="col-md-9"><br>
+                    <h5 style="font-size:15px; color : #565e6a;" class="getVal"></h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+        {% endfor %}
+        </ul><br><br><br>
+        {% else %}
+        <br>
+        <div style="width:50%;margin-left:25%;" class="alert alert-primary" role="alert">
+            <center>No Best Matched Candidates Found!</center>
+        </div>
+        {% endif %}
+    </div>
+<br><br>
+
+
+        <script type="text/javascript">
+    var tag=document.getElementsByClassName("getVal");
+    for(let i=0;i<tag.length;i++)
+    {
+        let inText=tag[i].innerText;
+        inText=inText.replace("[","");
+        inText=inText.replace("]","");
+        inText=inText.replaceAll("\"","");
+        tag[i].innerText=inText;
+    }
+    function myFunction() {
+  alert("Candidate is Shortlisted!Please view my candidate screen");
+}
+
+</script>
+{% endblock content %}

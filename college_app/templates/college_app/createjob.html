@@ -1,0 +1,542 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block content %}
+{% block style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" xmlns="http://www.w3.org/1999/html"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    <link rel="stylesheet" href="{% static 'css/gijgo.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slimselect.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <!-- \Datepicker -->
+<!-- \Datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<script>
+$(document).ready(function() {
+    $('#start_date').datepicker();
+});
+function selection(){
+                                    var selected=document.getElementById("select1").value;
+                                  if(selected==0){
+                                    document.getElementById("input1").removeAttribute("hidden");
+                                  }else{
+                                    //elsewhere actions
+                                  }
+
+</script>
+    <style type="text/css">
+        .ss-main .ss-multi-selected{
+          border:1px solid grey;
+
+        }
+        .ss-main{
+            width:100%;
+            height:100px;
+            border-radius:5px;
+            border:3px solid blue;
+
+        }
+        li{
+            list-style: none;
+        }
+        ul{
+            padding-left: 0;
+        }
+        .titletext:before,
+        .titletext:after{
+        background-color: blue;
+            content: "";
+            display: inline-block;
+            height: 3px;
+            position: relative;
+            vertical-align: middle;
+            width: 10%;
+            font-size: 10px;
+            font-style:Serif;
+        }
+
+       .titletext:before {
+            right: 0.5em;
+            margin-left: -10%;
+       }
+
+       .titletext:after {
+            left: 0.5em;
+            margin-right: -15%;
+        }
+.form-group{
+  padding:10px
+  margin:10px;
+   font-size: 12px;
+
+}
+
+.form-group>label{
+  position:absolute;
+  top:-10px;
+  left:35px;
+  background-color:white;
+  font-size:12px;
+}
+.input-group{
+
+  border:3px solid blue;
+  width:100%;
+  border-radius: 5px;
+  height:40px;
+}
+.form-group>input{
+  border:3px solid blue;
+  width:100%;
+  border-radius: 5px;
+  height:40px;
+}
+.form-group>textarea{
+ border:3px solid blue;
+ height:110px;
+ width:432px;
+ border-radius: 5px;
+}
+.form-group>select{
+ border:3px solid blue;
+ width:100%;
+ height:40px;
+ border-radius:5px;
+}
+.form-check{
+ border:3px solid blue;
+ width:100%;
+ height:40px;
+ border-radius:5px;
+}
+}
+
+.form-group1{
+  padding:10px
+  margin:10px;
+}
+.form-group1>label{
+  position:absolute;
+  top:-10px;
+  left:35px;
+  background-color:white;
+
+}
+#id1{
+   padding:10px
+  margin:10px;
+  position:absolute;
+  top:-15px;
+  left:35px;
+  background-color:white;
+}
+.form-group1>textarea{
+ border:3px solid blue;
+ height:110px;
+ width:138%;
+ border-radius: 5px;
+}
+fieldset.scheduler-border {
+    border: 3px solid blue !important;
+    padding: 5px;
+    margin: 10px;
+    position:relative;
+    top:-15px;
+    width:100%;
+    border-radius:5px;
+    height:100px;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+
+}
+
+    legend.scheduler-border {
+        font-size: 1.1em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+
+        padding:0 0.5em;
+        border-bottom:none;
+
+    }
+.space_lg{
+    width:315px;
+}
+
+
+.select-css {
+    display: block;
+    font-size: 14px;
+    font-style:Sans-serif
+    font-weight: Normal;
+    color: #708090;
+    line-height: 1.3;
+    padding: .6em 1.4em .5em .8em;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #aaa;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    border-radius: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .90em auto, 100%;
+
+
+}
+.select-css::-ms-expand {
+    display: none;
+
+}
+
+.select-css:focus {
+    border-color: #3BB9FF;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusing;
+    color: #222;
+    outline: #3BB9FF;
+
+
+
+}
+.select-css option {
+    font-weight:normal;
+    outline: #3BB9FF;
+    padding: 8px 16px;
+  border: 10px solid  #3BB9FF;
+  border-color: #3BB9FF;
+}
+
+option{
+          padding: 10px 15px;
+          border: 10px solid  #E0FFFF;
+          border-color: black;
+           user-select:none;
+}
+
+</style>
+{% endblock style %}
+<link rel="stylesheet" href="{% static 'css/gijgo.min.css' %}">
+
+    <!-- Masthead-->
+<br><br><br><br>
+<div class="container-fluid mt--6">
+    <div class="row justify-content-center">
+        <div class="col-md-11 col-12">
+
+                            <h1 style="text-align:center;color:blue;font-weight:strong;font-size:48px"><b>Job Post</b></h1>
+                            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <br>
+                <h4 class="titletext"><b>About the Job</b></h4><br>
+                <div class="row">
+                    <div class="col-xl form-group ">
+                    <label ><b>Primary Profile*</b></label>
+
+
+
+                           {{ form.primary_profile }}
+
+
+                    </div>
+
+
+                    <div class="col-xl form-group" style="width:140%;" >
+                        <label ><b>&nbsp;Job Title</b></label>
+
+                          {{ form.job_title  }}
+                    </div>
+                    <div class="col-xl form-group">
+                        <label><b>&nbsp;Number of Openings*&nbsp;</b></label>
+                  {{ form.job_vacancies }}
+                    </div>
+                </div>
+                    <br>
+
+                    <div class="row">
+
+                   <div class="col-xl form-group" >
+                       <label><b>&nbsp;State&nbsp; </b></label>
+
+
+                           {{ form.state }}
+
+
+
+
+
+                    </div>
+
+                        <div class="col-xl form-group">
+                            <label><b> &nbsp;City&nbsp; </b></label>
+                                 {{ form.city }}
+                        </div>
+
+
+                  <div class="col-xl form-group" >
+                    <label><b>Location Pincode</b></label>
+                   {{ form.pincode }}
+                </div>
+              </div>
+
+                <br>
+                <div class = "row" style="width:74%;">
+                <div class="col-xl form-group1">
+                        <label><b>&nbsp;&nbsp;Job Description*&nbsp;</b></label>
+                    {{ form.job_info }}
+                    </div>
+
+
+                </div>
+                    <br>
+
+                <div class="row">
+
+
+                <div class="col-xl form-group ">
+
+                    <label><b>&nbsp;Notice Period&nbsp;</b></label>
+
+                        {{ form.notice_period  }}
+                </div>
+
+                  <div class="col-xl form-group">
+
+                    <label><b>&nbsp;Working Hour&nbsp;</b></label>
+                   {{ form.working_hour }}
+                </div>
+
+
+                <div class="col-xl form-group ">
+<!--                 (original)        <div class="input-group" >-->
+<!--                <label id="id1" ><b>&nbsp;Start Date&nbsp;</b></label>-->
+
+<!--                    <input type="date" id="start_date" class="form-control"  name="job[start_date]" value="{{ job.start_date }}  placeholder="Immediately" />-->
+<!--                    <span class="input-group-addon">-->
+<!--                        <span class="glyphicon glyphicon-calendar"></span>-->
+<!--                    </span></div>-->
+
+
+                    <div class="input-group" >
+                        <label id="id1" ><b>&nbsp;Start Date&nbsp;</b></label>
+                        <input type="text" id="start_date" placeholder="Select Date" class="dropdown-toggle form-control" data-toggle="dropdown"  />
+                         <i class="fa fa-calendar form-control-feedback"></i>
+
+                        <!--                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials-->
+<!--                            <span class="caret"></span></button>-->
+                            <ul class="dropdown-menu form-group" >
+                                 <li><a tabindex="-1" href="#">Immediately</a></li>
+                                 <li><input type="date" name="job[start_date]" value="{{ job.start_date }}"  placeholder="Select Date"
+                                            onclick="(this.type='date')"/><span class="caret"></span>
+                                 </li>
+<!--                              <li class="dropdown-submenu">-->
+<!--                                <a tabindex="-1" href="#">Select Date <span class="caret"></span></a>-->
+<!--                                <ul class="dropdown-menu ">-->
+<!--                                  <li><input type="date"></li>-->
+<!--                                    </ul>-->
+<!--                              </li>-->
+                            </ul>
+
+                        </div>
+
+
+
+
+                </div>
+    </div>
+
+
+
+                    <br>
+                      <div class="row">
+
+                    <div class=" col-xl form-group"  >
+                        <label><b>Essential Skills Required</b></label>
+                       {{ form.essential_skills }}
+                    </div>
+                    <div class="col-xl form-group" >
+                        <label><b>&nbsp;Industry Type&nbsp; </b></label>
+                       {{ form.industry_type }}
+                    </div>
+                     <div class=" col-xl form-group" >
+
+                    </div>
+
+                </div>
+
+                </div>
+                <div>
+                    <br>
+                <h4 class="titletext"><b>Who can Apply</b></h4><br>
+                <div class="row">
+                <div class="col-xl form-group" >
+                    <div class="form-group" style="position:relative;left:0%;">
+                        <label><b>&nbsp;Experience Required&nbsp;</b></label>
+                    {{ form.exp_req }}
+                    </div>
+                <div class="form-group" style="position:relative;top:9px;left:0%;">
+                        <label><b>&nbsp;Certification Required&nbsp;</b></label>
+                    {{ form.cert_req }}
+                    </div>
+                </div>
+                    {% for field in form %}
+                    {% if field.name in "job_requirements,education_quali" %}
+                                        <div class="col-xl form-group">
+                                            <label style="position:relative;z-index:1;background-color:white;"><b>{{field.label_tag}}</b></label>
+                                            <select multiple style="top:-30px; padding-top:5px;" class="form-control"  name="{{field.name}}" required id="id_{{field.name}}" >
+                                            {% for x,y in field.field.choices %}
+                                                <option value="{{x}}">{{y}}</option>
+                                            {% endfor %}
+                                            </select>
+                                            <script type="text/javascript">
+                                                select_req=new SlimSelect({
+                                                    select: '#id_job_requirements',
+                                                    closeOnSelect: false,
+                                                    addToBody: true,
+                                                    hideSelectedOption: true,
+                                                    placeholder: 'Select Required Skills',
+                                                });
+                                                select_edu=new SlimSelect({
+                                                    select: '#id_education_quali',
+                                                    closeOnSelect: false,
+                                                    addToBody: true,
+                                                    hideSelectedOption: true,
+                                                    placeholder: 'Select Required Education',
+                                                });
+                                                var path=window.location.pathname;
+                                                if(path.endsWith('update/')==true)
+                                                {   var ul_req=document.getElementsByTagName("ul")[9];
+                                                    ul_req.classList.add("d-none");
+                                                    var items_req=ul_req.getElementsByTagName("input");
+                                                    var select_req;
+                                                    var arr_req=[];
+                                                    for(let i=0;i<items_req.length;i++)
+                                                    {
+                                                        if(items_req[i].checked)
+                                                        {   arr_req.push(items_req[i].value.trim());
+                                                            items_req[i].checked=false;
+                                                        }
+                                                        select_req.set(arr_req);
+                                                    }
+                                                    var ul_edu=document.getElementsByTagName("ul")[10];
+                                                    ul_edu.classList.add("d-none");
+                                                    var items_edu=ul_edu.getElementsByTagName("input");
+                                                    var select_edu;
+                                                    var arr_edu=[];
+                                                    for(let i=0;i<items_edu.length;i++)
+                                                    {
+                                                        if(items_edu[i].checked)
+                                                        {   arr_edu.push(items_edu[i].value.trim());
+                                                            items_edu[i].checked=false;
+                                                        }
+                                                        select_edu.set(arr_edu);
+                                                    }
+                                                }
+                                                else
+                                                {   var ul_req1=document.getElementsByTagName("ul")[11];
+                                                    ul_req1.classList.add("d-none");
+                                                    var ul_edu1=document.getElementsByTagName("ul")[12];
+                                                    ul_edu1.classList.add("d-none");
+                                                }
+
+
+                                             </script>
+                                            <script src="{% static 'js/jquery-3.5.1.min.js' %}" charset="utf-8"></script>
+                                            <script src="{% static 'js/gijgo.min.js' %}" charset="utf-8"></script>
+                                            <script src="{% static 'js/slimselect.min.js' %}" charset="utf-8"></script>
+                                            </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                </div>
+                <div>
+                    <br>
+                <h4 class="titletext"><b>Salary of Job</b></h4><br>
+                <div class="row">
+                <div class="col-xl form-group" >
+                    <div class="form-group" style="width:65%;">
+                        <label><b>&nbsp;Job Type&nbsp;</b></label>
+                    {{ form.types_of_job }}
+                    </div>
+                <div class="row form-group" style="width:67%;">
+                        <div class="col-xl form-group" >
+                            <label><b>Minimum&nbsp;</b></label>
+                    {{ form.minimum }}
+                        </div>
+                        <div class="col-xl form-group" >
+                            <label><b>Maximum</b></label>
+                    {{ form.maximum }}
+                    </div>
+                    </div>
+                    </div>
+                     <div class="col-xl form-group" >
+                       <div class="form-group" style="position:relative;width:135%;left:-35%" >
+                            <fieldset class="scheduler-border" >
+                                <legend class="scheduler-border" id="id1">Perks</legend>
+                                <div class="control-group">
+
+                                    &nbsp;<id="Certifications" name="perks[]" value="Certifications">
+                                        <label >{{ form.cert }} Certification</label>
+
+                                    <id="Other" name="perks[]" value="Other" class="space_lg">
+                                        <label style="position:absolute;left:240px;">{{ form.others }} Others</label><br>
+
+                                        &nbsp;<id="LOR" name="perks[]" value="LOR">
+                                        <label > {{ form.lor }} Letter Of Recommendations</label>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <name="perks[]"  class="pr-5" >{{ form.other }}
+                                    <br>
+                                        &nbsp;<id="WorkHour" name="perks[]" value="WorkHour">
+                                        <label >{{ form.wh }} Flexible Work Hours</label><br>
+
+
+                                </div>
+                            </fieldset>
+
+                    </div>
+                    </div>
+
+
+
+
+                </div>
+                </div>
+                <div class="text-center col-md-12 mb-5">
+                                    <!--<button type="submit" class="btn btn-warning rounded-pill">SAVE DRAFT</button>-->
+                                    <input type="submit" class="btn btn-primary rounded-pill" value="POST JOB"></input>
+                                </div>
+            </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<br><br><br>
+</div>
+{% endblock content %}
+
+
+

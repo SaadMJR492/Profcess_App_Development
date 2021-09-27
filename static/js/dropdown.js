@@ -1,0 +1,16 @@
+$('#id_job_requirements').multipleSelect({
+    multiple: true,
+    filter: true,
+    locale: 'en-us',
+    multipleWidth: 300,
+    maxHeight: 150,
+    width: 300,
+    dropWidth: 300,
+    displayHtml: false,
+    displayValues: true,
+    displayTitle: true,
+    minimumCountSelected: 10,
+    keepOpen: true,
+    showClear: true,
+    placeholder: 'Select Skills',
+});

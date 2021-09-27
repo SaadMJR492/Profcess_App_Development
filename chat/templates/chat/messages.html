@@ -1,0 +1,64 @@
+{% extends 'chat/chat.html' %}
+{% block hide %}{% endblock %}
+{% block messages %}
+
+<div class="d-flex  justify-content-between mt-2 ml-2 mr-2 mb-2">
+    <div class="p-2"><i class="fa fa-arrow-left" style="font-size:24px"></i></div>
+    <div class="p-2"><b>
+            <p style="font-size:24px">{{ receiver.username }}</p>
+        </b></div>
+    <div class="p-2">
+        <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+            <img src="{{ receiver.applicantuserprofile.profile_pic.url }}" height="50px" width="50px"
+                style="border-radius: 50%" class="img-thumbnail" alt="profile" />
+            <img src="{{ url }}" alt="" /> </a>
+    </div>
+</div>
+
+
+
+<!--<div style="position: absolute; top:-50px; right: 500px; background:ghostwhite; font-size:20px; padding:10px; border: 1px solid lightgray; margin:10px; text-align: center;" class="title">Username:{{ receiver.username }}</div>-->
+{% for message in messages %}
+{% if message.sender == request.user %}
+<!--<div style="position: absolute; top: -4%; right: 500px; center:3px; font-weight: bolder" class="title">{{ receiver.username }}</div>-->
+
+<!--<div style="position: absolute; top: -22px; right:500px; font-weight: bolder; font-family:sans-serif;" class="title">{{ receiver.username }}
+
+    </div>-->
+
+<div class="d-flex flex-row-reverse">
+    <div class="p-2">
+        <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+            <img src="{{ request.user.applicantuserprofile.profile_pic.url }}" height="50px" width="50px"
+                style="border-radius: 50%" class="img-thumbnail" alt="profile" />
+            <img src="{{ url }}" alt="" /> </a>
+    </div>
+    <div class="card-panel right" style="width: 55%; position: relative">
+        <div style="position: absolute; top: 0; left:3px; font-weight: bolder" class="title">You</div>
+        {{ message }}
+    </div>
+</div>
+{% else %}
+<div class="d-flex flex-row ">
+    <div class="p-2">
+        <a href="{% url 'recruiter:upload_pic' pk=user.pk %}">
+            <img src="{{ message.sender.applicantuserprofile.profile_pic.url }}" height="50px" width="50px"
+                style="border-radius: 50%" class="img-thumbnail" alt="profile" />
+            <img src="{{ url }}" alt="" /> </a>
+    </div>
+    <div class="card-panel left blue lighten-5" style="width: 55%; position: relative">
+        <div style="position: absolute; top: 0; left:3px; font-weight: bolder" class="title">{{ message.sender }}</div>
+        {{ message }}
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<script>
+    $(function () {
+        //Highlighting the user that is currently selected for chatting in the users list
+        $('#user{{ receiver.id }}').addClass('active');
+        //Call receive function at an interval of 1 second to check for new messages in the database
+        setInterval(receive, 1000)
+    })
+</script>
+{% endblock %}
